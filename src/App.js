@@ -1,12 +1,17 @@
+//import React from 'react'; //only needed for class components; not used here
+import Header from './components/Header';
+
 function App() {
 
   return (
     <div className="container">
-      <h1>Hello From React</h1>
-      <h2>This is a change I am about to commit</h2>
-      <h3>This is another change I am about to commit</h3>
+      <Header title='Task Tracker' /> {/* passing 'Task tracker' as a prop to <Header /> component */}
     </div>
   );
+}
+
+Header.defaultProps = {
+  title: 'Awesome Task Tracker'//just here to illustrate that if I didn't pass any props to <Header />, then the default prop would be 'Awesome Task Tracker'
 }
 
 export default App;

@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div className="container">
-      <Header title='Task Tracker' /> {/* passing 'Task tracker' as a prop to <Header /> component */}
+      <Header title='Task Tracker - updated' /> {/* passing 'Task tracker' as a prop to <Header /> component */}
     </div>
   );
 }

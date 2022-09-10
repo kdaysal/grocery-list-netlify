@@ -1,11 +1,13 @@
 //import React from 'react'; //only needed for class components; not used here
 import Header from './components/Header';
+import Tasks from './components/Tasks';
 
 function App() {
 
   return (
     <div className="container">
-      <Header title='Task Tracker - updated' /> {/* passing 'Task tracker' as a prop to <Header /> component */}
+      <Header title='Task Tracker' /> {/* passing 'Task tracker' as a prop to <Header /> component */}
+      <Tasks />
     </div>
   );
 }

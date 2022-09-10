@@ -33,10 +33,17 @@ const App = () => {
     ]
   )
 
+  //Delete a task
+  const deleteTask = (id) => {
+    console.log(`will delete: `, id)
+  }
+
   return (
     <div className="container">
       <Header title='Task Tracker' /> {/* passing 'Task tracker' as a prop to <Header /> component */}
-      <Tasks tasks={tasks} />
+      <Tasks tasks={tasks}
+        onDelete={deleteTask}
+      />
     </div>
   );
 }

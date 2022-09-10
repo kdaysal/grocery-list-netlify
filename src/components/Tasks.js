@@ -1,5 +1,6 @@
-//This component will set and update all of the individual grocery items (tasks)
+//This component will generate a list of all of the individual grocery items (tasks)
 
+import Task from "./Task"
 
 const Tasks = ({ tasks }) => {
   //initialize state of tasks
@@ -8,7 +9,7 @@ const Tasks = ({ tasks }) => {
     //loop thru each element of the tasks array to output a list of all the individual tasks
     <>
       {tasks.map((task) => (
-        <h3 key={task.id}>{task.text}</h3>
+        <Task key={task.id} task={task} />
       ))}
     </>
   )

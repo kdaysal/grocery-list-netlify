@@ -2,11 +2,18 @@ import PropTypes from 'prop-types'//prop-types is totally optional for a small a
 import Button from './Button'
 
 const Header = ({ title }) => {
+  const onClick = () => {
+    console.log(`button clicked!`)
+  }
+
   return (
     <header>
       <h1 style={{ color: 'red', backgroundColor: 'black' }}>{title}</h1>
-      <Button btnText="Add" btnColor='green' />
-      <Button btnText="Delete" btnColor='red' />
+      <Button
+        btnText="Add"
+        btnColor='green'
+        onClick={onClick}
+      />
     </header>
   )
 }

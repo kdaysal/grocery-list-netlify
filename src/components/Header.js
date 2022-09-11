@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types'//prop-types is totally optional for a small app like this - I'm adding it here for reference
 import Button from './Button'
 
-const Header = ({ title, onAdd }) => {
+const Header = ({ title, onAdd, showAddTask }) => {
 
   return (
     <header>
       <h1 style={{ color: 'red', backgroundColor: 'black' }}>{title}</h1>
       <Button
-        btnText="Add"
-        btnColor='green'
+        btnText={showAddTask ? 'Close' : 'Add'}
+        btnColor={showAddTask ? 'blue' : 'green'}
         onClick={onAdd}
       />
     </header>

@@ -42,7 +42,8 @@ body {
   border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
-  background-color: #313133a4;
+  /* background-color: #313133a4; */
+  background-color: lightgrey;
 }
 
 .header {
@@ -80,7 +81,7 @@ body {
 }
 
 .task {
-  background: #f4f4f431;
+  background: hwb(182 47% 29% / 0.192);
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;

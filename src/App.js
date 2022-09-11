@@ -36,6 +36,7 @@ const App = () => {
   //   ]
   // )
 
+  //On initial page load, retrieve tasks from mock api server and update state of 'tasks' accordingly
   useEffect(() => {
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks();
@@ -55,20 +56,35 @@ const App = () => {
   }
 
   //Add a task (grocery item)
-  const addTask = (task) => {
+  const addTask = async (task) => {
     console.log(`adding new task: ${JSON.stringify(task)}`);
+    const res = await fetch('http://localhost:5000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(task)
+    })
 
-    //for now, just generate a random number between 1 and 10,000 to represent the 'unique' ID
-    const id = Math.floor(Math.random() * 10000) + 1;
-    console.log(`id= ${id}`);
+    const data = await res.json(); //the data that will be returned is just the new task that has been added
 
-    const newTask = { id, ...task };
-    console.log(`newTask:`, newTask);
-    setTasks([...tasks, newTask]);
+    setTasks([...tasks, data]);// now update state of 'tasks' to be what it was before, plus the new task that was just created
+
+    /* one manual way to create an ID below - commented out - by just generating a random number between 1 and 10,000 to represent the 'unique' ID */
+    // const id = Math.floor(Math.random() * 10000) + 1;
+    // console.log(`id= ${id}`);
+    // const newTask = { id, ...task };
+    // console.log(`newTask:`, newTask);
+    // setTasks([...tasks, newTask]);
   }
 
   //Delete a task (grocery item)
-  const deleteTask = (id) => {
+  const deleteTask = async (id) => {
+    //first delete the task from the mock server, then filter it out from the UI
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'DELETE'
+    })
+
     console.log(`will delete: `, id);
     setTasks(tasks.filter((task) => task.id !== id));
   }

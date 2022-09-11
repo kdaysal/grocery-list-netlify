@@ -34,7 +34,21 @@ const App = () => {
     ]
   )
 
-  //Delete a task
+  //Add a task (grocery item)
+
+  const addTask = (task) => {
+    console.log(`adding new task: ${JSON.stringify(task)}`);
+
+    //for now, just generate a random number between 1 and 10,000 to represent the 'unique' ID
+    const id = Math.floor(Math.random() * 10000) + 1;
+    console.log(`id= ${id}`);
+
+    const newTask = { id, ...task };
+    console.log(`newTask:`, newTask);
+    setTasks([...tasks, newTask]);
+  }
+
+  //Delete a task (grocery item)
   const deleteTask = (id) => {
     console.log(`will delete: `, id);
     setTasks(tasks.filter((task) => task.id !== id));
@@ -49,7 +63,7 @@ const App = () => {
   return (
     <div className="container">
       <Header title='Task Tracker' /> {/* passing 'Task tracker' as a prop to <Header /> component */}
-      <AddTask />
+      <AddTask onAdd={addTask} />
       {tasks.length > 0 ? <Tasks tasks={tasks}
         onDelete={deleteTask}
         onToggle={toggleReminder}

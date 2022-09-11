@@ -1,5 +1,5 @@
 //import React from 'react'; //only needed for class components; not used here
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from './components/Header';
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
@@ -35,6 +35,24 @@ const App = () => {
   //     }
   //   ]
   // )
+
+  useEffect(() => {
+    const getTasks = async () => {
+      const tasksFromServer = await fetchTasks();
+      setTasks(tasksFromServer);
+    }
+    getTasks();
+  }, [])
+
+  //Fetch grocery items
+  const fetchTasks = async () => {
+    const res = await fetch('http://localhost:5000/tasks');
+    const data = await res.json();
+    console.log(data);
+    //console.log('data stringified: ' + JSON.stringify(data));
+
+    return data;
+  }
 
   //Add a task (grocery item)
   const addTask = (task) => {

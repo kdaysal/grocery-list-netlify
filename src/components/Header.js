@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types'//prop-types is totally optional for a small app like this - I'm adding it here for reference
 import Button from './Button'
 
-const Header = ({ title }) => {
-  const onClick = () => {
-    console.log(`button clicked!`)
-  }
+const Header = ({ title, onAdd }) => {
 
   return (
     <header>
@@ -12,7 +9,7 @@ const Header = ({ title }) => {
       <Button
         btnText="Add"
         btnColor='green'
-        onClick={onClick}
+        onClick={onAdd}
       />
     </header>
   )

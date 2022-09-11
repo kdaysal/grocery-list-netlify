@@ -66,7 +66,7 @@ const App = () => {
         onAdd={() => setShowAddTask(!showAddTask)}
         showAddTask={showAddTask}
       />
-      {showAddTask && <AddTask onAdd={addTask} />}
+      {showAddTask && <AddTask onAdd={addTask} onSave={() => setShowAddTask(!showAddTask)} />}
       {tasks.length > 0 ? <Tasks tasks={tasks}
         onDelete={deleteTask}
         onToggle={toggleReminder}

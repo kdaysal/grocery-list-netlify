@@ -6,34 +6,35 @@ import AddTask from './components/AddTask';
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
-  const [tasks, setTasks] = useState(
-    [
-      {
-        id: 1,
-        text: 'Watermelon',
-        aisle: 7,
-        reminder: true
-      },
-      {
-        id: 2,
-        text: 'Pizza',
-        aisle: 16,
-        reminder: false
-      },
-      {
-        id: 3,
-        text: 'Soup',
-        aisle: 'Deli',
-        reminder: false
-      },
-      {
-        id: 4,
-        text: 'Crackers',
-        aisle: '4',
-        reminder: true
-      }
-    ]
-  )
+  const [tasks, setTasks] = useState([]); //keep this line if the mock data in db.json file actually works. If it fails, delete this line and uncomment the below
+  // const [tasks, setTasks] = useState(
+  //   [
+  //     {
+  //       id: 1,
+  //       text: 'Watermelon',
+  //       aisle: 7,
+  //       reminder: true
+  //     },
+  //     {
+  //       id: 2,
+  //       text: 'Pizza',
+  //       aisle: 16,
+  //       reminder: false
+  //     },
+  //     {
+  //       id: 3,
+  //       text: 'Soup',
+  //       aisle: 'Deli',
+  //       reminder: false
+  //     },
+  //     {
+  //       id: 4,
+  //       text: 'Crackers',
+  //       aisle: '4',
+  //       reminder: true
+  //     }
+  //   ]
+  // )
 
   //Add a task (grocery item)
   const addTask = (task) => {

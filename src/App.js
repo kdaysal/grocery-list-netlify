@@ -45,13 +45,20 @@ const App = () => {
     getTasks();
   }, [])
 
-  //Fetch grocery items
+  //Fetch full list of all grocery items from the server
   const fetchTasks = async () => {
     const res = await fetch('http://localhost:5000/tasks');
     const data = await res.json();
     console.log(data);
     //console.log('data stringified: ' + JSON.stringify(data));
+    return data;
+  }
 
+  //Fetch a single grocery item object from the server
+  const fetchTask = async (id) => {
+    const res = await fetch(`http://localhost:5000/tasks/${id}`);
+    const data = await res.json();
+    console.log(data);
     return data;
   }
 
@@ -90,9 +97,21 @@ const App = () => {
   }
 
   //Toggle reminder on/off
-  const toggleReminder = (id) => {
-    console.log(id);
-    setTasks(tasks.map((task) => task.id === id ? { ...task, reminder: !task.reminder } : task))
+  const toggleReminder = async (id) => {
+    const taskToToggle = await fetchTask(id);
+    const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder }; //just making a copy of the existing task but setting the 'reminder' value to the opposite of whatever it currently was
+
+    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(updatedTask)
+    })
+
+    const data = await res.json();
+
+    setTasks(tasks.map((task) => task.id === id ? { ...task, reminder: data.reminder } : task))
   }
 
   return (

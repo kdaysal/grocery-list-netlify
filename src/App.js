@@ -45,11 +45,7 @@ const App = () => {
     getTasks();
   }, [])
 
-<<<<<<< Updated upstream
-  //Fetch full list of all grocery items from the server
-=======
-  //Fetch grocery items and return the response as json
->>>>>>> Stashed changes
+  //Fetch full list of all grocery items from the server and return the response as json
   const fetchTasks = async () => {
     const res = await fetch('http://localhost:5000/tasks');
     const data = await res.json();

@@ -23,6 +23,12 @@
       "aisle": "6",
       "reminder": true,
       "id": 4
+    },
+    {
+      "text": "Juicy fried chicken`",
+      "aisle": "Deli",
+      "reminder": true,
+      "id": 5
     }
   ]
 }

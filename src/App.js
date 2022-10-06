@@ -45,7 +45,11 @@ const App = () => {
     getTasks();
   }, [])
 
+<<<<<<< Updated upstream
   //Fetch full list of all grocery items from the server
+=======
+  //Fetch grocery items and return the response as json
+>>>>>>> Stashed changes
   const fetchTasks = async () => {
     const res = await fetch('http://localhost:5000/tasks');
     const data = await res.json();
@@ -75,7 +79,7 @@ const App = () => {
 
     const data = await res.json(); //the data that will be returned is just the new task that has been added
 
-    setTasks([...tasks, data]);// now update state of 'tasks' to be what it was before, plus the new task that was just created
+    setTasks([...tasks, data]);// now update state of 'tasks' to be what it was before, plus the new task that was just created. This is basically just appending the new task to the end of the current task-list array.
 
     /* one manual way to create an ID below - commented out - by just generating a random number between 1 and 10,000 to represent the 'unique' ID */
     // const id = Math.floor(Math.random() * 10000) + 1;

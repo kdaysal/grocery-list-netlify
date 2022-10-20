@@ -1,6 +1,6 @@
 //This component will generate a list of all of the individual grocery items (tasks)
 
-import Task from "./Task"
+import Task from "../Task/Task"
 
 const Tasks = ({ tasks, onDelete, onToggle }) => {
   //initialize state of tasks

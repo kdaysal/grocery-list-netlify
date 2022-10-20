@@ -10,7 +10,7 @@
       "id": 2,
       "text": "Pizza",
       "aisle": 16,
-      "reminder": false
+      "reminder": true
     },
     {
       "id": 3,

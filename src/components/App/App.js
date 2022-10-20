@@ -1,8 +1,8 @@
 //import React from 'react'; //only needed for class components; not used here
 import { useState, useEffect } from 'react'
-import Header from './components/Header';
-import Tasks from './components/Tasks';
-import AddTask from './components/AddTask';
+import Header from '../Header/Header';
+import Tasks from '../Tasks/Tasks';
+import AddTask from '../AddTask/AddTask';
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -116,7 +116,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <Header title='Task Tracker'
+      <Header title='Grocery List'
         onAdd={() => setShowAddTask(!showAddTask)}
         showAddTask={showAddTask}
       />

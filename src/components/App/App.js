@@ -7,6 +7,7 @@ import AddTask from '../AddTask/AddTask';
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]); //keep this line if the mock data in db.json file actually works. If it fails, delete this line and uncomment the below
+  const [user, setUser] = useState('New User');
   // const [tasks, setTasks] = useState(
   //   [
   //     {
@@ -119,6 +120,7 @@ const App = () => {
       <Header title='Grocery List'
         onAdd={() => setShowAddTask(!showAddTask)}
         showAddTask={showAddTask}
+        user={user}
       />
       {showAddTask && <AddTask onAdd={addTask} onSave={() => setShowAddTask(!showAddTask)} />}
       {tasks.length > 0 ? <Tasks tasks={tasks}

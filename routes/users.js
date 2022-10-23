@@ -2,12 +2,18 @@
 
 const express = require('express');
 const router = express.Router();
+const User = require('../models/user');
 
 // Get all users
 // to test with Postman, run a GET call on url: http://localhost:3000/users
-router.get('/', (req, res) => {
-  res.send('Hello World from my /users route') // here the '/' is actually my '/users' route due to: <app.use('/users', usersRouter)> in my server.js file;
-
+router.get('/', async (req, res) => {
+  //res.send('Hello World from my /users route') // here the '/' is actually my '/users' route due to: <app.use('/users', usersRouter)> in my server.js file;
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 })
 
 // Get one user

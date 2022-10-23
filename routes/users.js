@@ -4,8 +4,9 @@ const express = require('express');
 const router = express.Router();
 
 // Get all users
+// to test with Postman
 router.get('/', (req, res) => {
-
+  res.send('Hello World from my / route')
 })
 
 // Get one user

@@ -16,9 +16,10 @@ router.get('/', async (req, res) => {
   }
 })
 
-// Get one user
-router.get('/:id', (req, res) => {
-  res.send(`fetching details for user id: ${req.params.id}`);
+// Get one user (note - this calls the middleware function 'getUser' first to ensure a valid user is found)
+router.get('/:id', getUser, async (req, res) => {
+  //res.send(`fetching details for user id: ${req.params.id}`);
+  res.json(res.user); // the 'getUser' middleware function has already passed in all of the details for the user (IF it completed successfully)
 })
 
 // Create one user
@@ -38,13 +39,35 @@ router.post('/', async (req, res) => {
 })
 
 // Update one user
-router.patch('/:id', (req, res) => {
+router.patch('/:id', getUser, async (req, res) => {
 
 })
 
 // Delete one user
-router.delete('/:id', (req, res) => {
-
+router.delete('/:id', getUser, async (req, res) => {
+  try {
+    await res.user.remove();
+    res.json({ message: `User ${req.params.id} was successfully removed` });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 })
+
+// MIDDLEWARE function to get a user by their _id. This function will be called at the beginning of most of my other routes, so this cuts down on repetitive code
+async function getUser(req, res, next) {
+  let user; //default user to undefined
+  try {
+    user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'Unable to find user' }); // I'm calling 'return' here because if the user was not found, I want to exit out of this method (and not set res.user = user)
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+
+  // code below will only run IF a user was successfully found...
+  res.user = user; // creates a new variable 'user' within the response object and sets it to the user that was found in the db
+  next(); // move on to the next piece of middleware, or the actual request itself
+}
 
 module.exports = router;

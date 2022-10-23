@@ -22,7 +22,18 @@ router.get('/:id', (req, res) => {
 })
 
 // Create one user
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+  const user = new User({
+    name: req.body.name,
+    groceryListItems: req.body.groceryListItems
+  })
+
+  try {
+    const newUser = await user.save();
+    res.status(201).json(newUser);
+  } catch (err) {
+    res.status(400).json({ message: err.message })
+  }
 
 })
 

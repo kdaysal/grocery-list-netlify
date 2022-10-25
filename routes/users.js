@@ -1,4 +1,4 @@
-/* global require, module */ //this prevents eslint from marking these undefined vars as errors
+/* global require, module */ //this prevents eslint from marking any undefined vars as errors
 
 const express = require('express');
 const router = express.Router();
@@ -40,6 +40,32 @@ router.post('/', async (req, res) => {
 
 // Update one user
 router.patch('/:id', getUser, async (req, res) => {
+  //if the user's name is not null, update it
+  if (req.body.name != null) {
+    res.user.name = req.body.name;
+  }
+
+  //if the itemName is not null, update it
+  if (req.body.groceryListItems[0].itemName != null) {
+    res.user.groceryListItems[0].itemName = req.body.groceryListItems[0].itemName;
+  }
+
+  //if the aisle is not null, update it
+  if (req.body.groceryListItems[0].aisle != null) {
+    res.user.groceryListItems[0].aisle = req.body.groceryListItems[0].aisle;
+  }
+
+  //if the reminder is not null, update it
+  if (req.body.groceryListItems[0].reminder != null) {
+    res.user.groceryListItems[0].reminder = req.body.groceryListItems[0].reminder;
+  }
+
+  try {
+    const updatedUser = await res.user.save();
+    res.status(201).json(updatedUser);
+  } catch (err) {
+    res.status(400).json({ message: err.message })
+  }
 
 })
 

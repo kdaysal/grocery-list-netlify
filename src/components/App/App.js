@@ -7,7 +7,7 @@ import AddTask from '../AddTask/AddTask';
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]); //keep this line if the mock data in db.json file actually works. If it fails, delete this line and uncomment the below
-  const [user, setUser] = useState('New User');
+  const [user, setUser] = useState('Select User');
   // const [tasks, setTasks] = useState(
   //   [
   //     {
@@ -37,9 +37,10 @@ const App = () => {
   //   ]
   // )
 
-  //On initial page load, retrieve tasks from mock api server and update state of 'tasks' accordingly
+  //On initial page load, retrieve users from my api server and update state of 'users' accordingly
   useEffect(() => {
     const getTasks = async () => {
+      console.log(`getTasks called`);
       const tasksFromServer = await fetchTasks();
       setTasks(tasksFromServer);
     }
@@ -48,7 +49,7 @@ const App = () => {
 
   //Fetch full list of all grocery items from the server and return the response as json
   const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/tasks');
+    const res = await fetch('https://damp-forest-55138.herokuapp.com/users');
     const data = await res.json();
     console.log(data);
     //console.log('data stringified: ' + JSON.stringify(data));

@@ -39,16 +39,16 @@ const App = () => {
 
   //On initial page load, retrieve users from my api server and update state of 'users' accordingly
   useEffect(() => {
-    const getTasks = async () => {
-      console.log(`getTasks called`);
-      const tasksFromServer = await fetchTasks();
+    const getUsers = async () => {
+      console.log(`getUsers called`);
+      const tasksFromServer = await fetchUsers();
       setTasks(tasksFromServer);
     }
-    getTasks();
+    getUsers();
   }, [])
 
   //Fetch full list of all grocery items from the server and return the response as json
-  const fetchTasks = async () => {
+  const fetchUsers = async () => {
     const res = await fetch('https://damp-forest-55138.herokuapp.com/users');
     const data = await res.json();
     console.log(data);

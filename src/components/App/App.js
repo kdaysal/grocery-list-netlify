@@ -8,7 +8,7 @@ const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]); //keep this line if the mock data in db.json file actually works. If it fails, delete this line and uncomment the below
   const [allUsers, setAllUsers] = useState([]);
-  const [user, setUser] = useState('Select User');
+  const [user, setUser] = useState('');
 
 
   //On initial page load, retrieve all users from my api server and update state of 'allUsers' accordingly

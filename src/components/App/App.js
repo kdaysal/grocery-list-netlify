@@ -7,21 +7,21 @@ import AddTask from '../AddTask/AddTask';
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]); //keep this line if the mock data in db.json file actually works. If it fails, delete this line and uncomment the below
-  const [allUsers, setAllUsers] = useState([]);
+  const [allUserData, setallUserData] = useState([]);
   const [user, setUser] = useState('');
+  const [allUserNames, setAllUserNames] = useState([]); // array to hold a list of all userNames in the application
 
-
-  //On initial page load, retrieve all users from my api server and update state of 'allUsers' accordingly
+  //On initial page load, retrieve all users from my api server and update state of 'allUserData' accordingly
   useEffect(() => {
-    const getAllUsers = async () => {
-      console.log(`getAllUsers called`);
-      const allUsers = await fetchUsers();
-      setAllUsers(allUsers);
-      console.log(`allUsers: ${JSON.stringify(allUsers)}`);
+    const getallUserData = async () => {
+      console.log(`getallUserData called`);
+      const allUserData = await fetchUsers();
+      setallUserData(allUserData);
+      console.log(`allUserData: ${JSON.stringify(allUserData)}`);
       const tasksFromServer = await fetchUsers();
       setTasks(tasksFromServer);
     }
-    getAllUsers();
+    getallUserData();
   }, [])
 
   //Fetch full list of all grocery items from the server and return the response as json
@@ -99,6 +99,7 @@ const App = () => {
         onAdd={() => setShowAddTask(!showAddTask)}
         showAddTask={showAddTask}
         user={user}
+        allUserData={allUserData}
       />
       {showAddTask && <AddTask onAdd={addTask} onSave={() => setShowAddTask(!showAddTask)} />}
       {tasks.length > 0 ? <Tasks tasks={tasks}

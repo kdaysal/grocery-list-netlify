@@ -7,9 +7,10 @@ import AddTask from '../AddTask/AddTask';
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]); //keep this line if the mock data in db.json file actually works. If it fails, delete this line and uncomment the below
-  const [allUserData, setallUserData] = useState([]);
-  const [user, setUser] = useState('');
-  const [allUserNames, setAllUserNames] = useState([]); // array to hold a list of all userNames in the application
+  const [allUserData, setallUserData] = useState([]); // object to hold the entirety of all data from my API
+  const [allUserNames, setAllUserNames] = useState([]); // an array to hold all unique user names
+  const [userName, setUserName] = useState(''); // string to hold the current user name that is 'in session'
+  const [user, setUser] = useState([]); // array to hold all data for only the current user who is 'in session'
 
   //On initial page load, retrieve all users from my api server and update state of 'allUserData' accordingly
   useEffect(() => {
@@ -23,6 +24,9 @@ const App = () => {
     }
     getallUserData();
   }, [])
+
+  // function to update state of 'userName' string and 'user' object for whichever user is now 'in session'
+
 
   //Fetch full list of all grocery items from the server and return the response as json
   const fetchUsers = async () => {
@@ -98,7 +102,7 @@ const App = () => {
       <Header title='Grocery List'
         onAdd={() => setShowAddTask(!showAddTask)}
         showAddTask={showAddTask}
-        user={user}
+        userName={userName}
         allUserData={allUserData}
       />
       {showAddTask && <AddTask onAdd={addTask} onSave={() => setShowAddTask(!showAddTask)} />}

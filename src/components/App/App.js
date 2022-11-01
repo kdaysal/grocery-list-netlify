@@ -18,7 +18,7 @@ const App = () => {
       console.log(`getallUserData called`);
       const allUserData = await fetchUsers();
       setallUserData(allUserData);
-      console.log(`allUserData: ${JSON.stringify(allUserData)}`);
+      //console.log(`allUserData: ${JSON.stringify(allUserData)}`);
       const tasksFromServer = await fetchUsers();
       setTasks(tasksFromServer);
     }

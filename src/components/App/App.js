@@ -31,7 +31,6 @@ const App = () => {
     console.log(`userName set to: ${userName}`);
     setUser(user);
     console.log(`user set to: ${JSON.stringify(user)}`);
-
   }
 
   //Fetch full list of all grocery items from the server and return the response as json

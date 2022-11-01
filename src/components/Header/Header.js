@@ -10,7 +10,10 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
 
   return (
     <header>
-      <h1 style={headingStyle}>{title} - {userName}</h1>
+      <h1 style={headingStyle}>{title} {userName ?
+        '- ' + userName
+        : ''}
+      </h1>
       {/* Only show the Add button if no current 'user' is set */}
       {userName && (
         <Button
@@ -30,6 +33,15 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
             onClick={() => updateUserSession(x.name, x)}
           >
           </Button>)
+      )
+      }
+      {/* If (user) then show a 'Change User button' */}
+      {userName && (
+        <Button
+          btnText={'Change User'}
+          btnColor={'blue'}
+          onClick={() => updateUserSession('', [])}
+        />
       )
       }
     </header>

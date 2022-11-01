@@ -26,7 +26,13 @@ const App = () => {
   }, [])
 
   // function to update state of 'userName' string and 'user' object for whichever user is now 'in session'
+  function updateUserSession(userName, user) {
+    setUserName(userName);
+    console.log(`userName set to: ${userName}`);
+    setUser(user);
+    console.log(`user set to: ${JSON.stringify(user)}`);
 
+  }
 
   //Fetch full list of all grocery items from the server and return the response as json
   const fetchUsers = async () => {
@@ -104,6 +110,7 @@ const App = () => {
         showAddTask={showAddTask}
         userName={userName}
         allUserData={allUserData}
+        updateUserSession={updateUserSession}
       />
       {showAddTask && <AddTask onAdd={addTask} onSave={() => setShowAddTask(!showAddTask)} />}
       {tasks.length > 0 ? <Tasks tasks={tasks}

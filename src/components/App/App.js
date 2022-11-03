@@ -7,7 +7,6 @@ import GroceryItems from '../GroceryItems/GroceryItems';
 
 const App = () => {
   const [showAddItem, setShowAddItem] = useState(false);
-  const [groceryItems, setGroceryItems] = useState([]); //keep this line if the mock data in db.json file actually works. If it fails, delete this line and uncomment the below
   const [allUserData, setallUserData] = useState([]); // object to hold the entirety of all data from my API
   const [allUserNames, setAllUserNames] = useState([]); // an array to hold all unique user names
   const [userName, setUserName] = useState(''); // string to hold the current user name that is 'in session'
@@ -33,9 +32,8 @@ const App = () => {
     setUser(user);
     console.log(`user set to: ${JSON.stringify(user)}`);
 
-    // the below line is always 1 iteration behind in updating - figure out WHY!?
-    setGroceryItems(groceryListItems);
-    console.log(`state of groceryItems: ${groceryItems}`);
+    let currentGroceryItems = JSON.stringify(user.groceryListItems);
+    console.log(`groceryItems for ${userName}: ${currentGroceryItems}`);
   }
 
   //Fetch full list of all grocery items from the server and return the response as json
@@ -47,6 +45,8 @@ const App = () => {
     return data;
   }
 
+  console.log(`user.groceryListItems is: ${JSON.stringify(user.groceryListItems)}`);
+
   return (
     <div className="container">
       <Header title='Grocery List'
@@ -57,11 +57,11 @@ const App = () => {
         updateUserSession={updateUserSession}
       />
 
-      {/* {groceryItems.length > 0 ? <GroceryItems groceryItems={groceryItems}
+      {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}
       />
         : (
           'No grocery items to show'
-        )} */}
+        )}
     </div>
   );
 }

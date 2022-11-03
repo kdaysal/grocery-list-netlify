@@ -2,7 +2,7 @@
 
 import GroceryItem from "../GroceryItem/GroceryItem"
 
-const GroceryItems = ({ GroceryItems, onDelete, onToggle }) => {
+const GroceryItems = ({ groceryListItems, onDelete, onToggle }) => {
   //initialize state of GroceryItems
 
   return (

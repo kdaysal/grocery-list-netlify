@@ -30,7 +30,7 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
             key={index}
             btnText={user.name}
             btnColor={'orange'}
-            onClick={() => updateUserSession(user.name, user, user.groceryListItems)}
+            onClick={() => updateUserSession(user.name, user)}
           >
           </Button>)
       )

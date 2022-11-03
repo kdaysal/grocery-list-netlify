@@ -24,12 +24,18 @@ const App = () => {
     getallUserData();
   }, [])
 
+
+
   // function to update state of 'userName' string and 'user' object for whichever user is now 'in session'
-  function updateUserSession(userName, user) {
+  function updateUserSession(userName, user, groceryListItems) {
     setUserName(userName);
     console.log(`userName set to: ${userName}`);
     setUser(user);
     console.log(`user set to: ${JSON.stringify(user)}`);
+
+    // the below line is always 1 iteration behind in updating - figure out WHY!?
+    setGroceryItems(groceryListItems);
+    console.log(`state of groceryItems: ${groceryItems}`);
   }
 
   //Fetch full list of all grocery items from the server and return the response as json
@@ -51,11 +57,11 @@ const App = () => {
         updateUserSession={updateUserSession}
       />
 
-      {groceryItems.length > 0 ? <GroceryItems groceryItems={groceryItems}
+      {/* {groceryItems.length > 0 ? <GroceryItems groceryItems={groceryItems}
       />
         : (
           'No grocery items to show'
-        )}
+        )} */}
     </div>
   );
 }

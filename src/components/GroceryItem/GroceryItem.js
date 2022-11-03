@@ -5,7 +5,7 @@ import { FaTimes } from 'react-icons/fa' //'font-awesome' icon to use for the 'X
 const GroceryItem = ({ groceryItem, onDelete, onToggle }) => {
   return (
     <div className={`groceryItem ${groceryItem.reminder ? 'reminder' : ''}`} onDoubleClick={() => onToggle(groceryItem.id)}>
-      <h3>{groceryItem.text} <FaTimes style={{ color: 'red', cursor: 'pointer' }}
+      <h3>{groceryItem.itemName} - {groceryItem.aisle} - {groceryItem.reminder} <FaTimes style={{ color: 'red', cursor: 'pointer' }}
         onClick={onDelete}
       />
       </h3>

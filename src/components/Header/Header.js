@@ -25,12 +25,12 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
       }
       {/* If no current 'user' is set, present buttons with all possible user names for the person to choose from (i.e. to set a single 'user')*/}
       {!userName && (
-        allUserData.map((x, index) =>
+        allUserData.map((user, index) =>
           <Button
             key={index}
-            btnText={x.name}
+            btnText={user.name}
             btnColor={'orange'}
-            onClick={() => updateUserSession(x.name, x)}
+            onClick={() => updateUserSession(user.name, user, user.groceryListItems)}
           >
           </Button>)
       )

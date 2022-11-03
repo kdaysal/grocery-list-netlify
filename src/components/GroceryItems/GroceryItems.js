@@ -8,7 +8,7 @@ const GroceryItems = ({ groceryListItems, onDelete, onToggle }) => {
   return (
     //loop thru each element of the GroceryItems array to output a list of all the individual GroceryItems
     <>
-      {GroceryItems.map((groceryItem) => (
+      {groceryListItems.map((groceryItem) => (
         <GroceryItem
           key={groceryItem.id}
           groceryItem={groceryItem}

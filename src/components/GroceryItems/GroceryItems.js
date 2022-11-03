@@ -10,9 +10,9 @@ const GroceryItems = ({ groceryListItems, onDelete, onToggle }) => {
     <>
       {groceryListItems.map((groceryItem) => (
         <GroceryItem
-          key={groceryItem.id}
+          key={groceryItem._id}
           groceryItem={groceryItem}
-          onDelete={() => onDelete(groceryItem.id)}
+          onDelete={() => onDelete(groceryItem._id)}
           onToggle={onToggle}
         />
       ))}

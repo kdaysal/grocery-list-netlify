@@ -80,18 +80,18 @@ body {
   width: 100%;
 }
 
-.task {
+.groceryItem {
   background: hwb(182 47% 29% / 0.192);
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
 }
 
-.task.reminder {
+.groceryItem.reminder {
   border-left: 5px solid green;
 }
 
-.task h3 {
+.groceryItem h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;

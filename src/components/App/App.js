@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react'
 import Header from '../Header/Header';
 import Tasks from '../Tasks/Tasks';
 import AddTask from '../AddTask/AddTask';
+import GroceryItems from '../GroceryItems/GroceryItems';
 
 const App = () => {
-  const [showAddTask, setShowAddTask] = useState(false);
-  const [tasks, setTasks] = useState([]); //keep this line if the mock data in db.json file actually works. If it fails, delete this line and uncomment the below
+  const [showAddItem, setShowAddItem] = useState(false);
+  const [groceryItems, setGroceryItems] = useState([]); //keep this line if the mock data in db.json file actually works. If it fails, delete this line and uncomment the below
   const [allUserData, setallUserData] = useState([]); // object to hold the entirety of all data from my API
   const [allUserNames, setAllUserNames] = useState([]); // an array to hold all unique user names
   const [userName, setUserName] = useState(''); // string to hold the current user name that is 'in session'
@@ -19,8 +20,6 @@ const App = () => {
       const allUserData = await fetchUsers();
       setallUserData(allUserData);
       //console.log(`allUserData: ${JSON.stringify(allUserData)}`);
-      const tasksFromServer = await fetchUsers();
-      setTasks(tasksFromServer);
     }
     getallUserData();
   }, [])
@@ -42,89 +41,27 @@ const App = () => {
     return data;
   }
 
-  //Fetch a single grocery item object from the server
-  const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  }
-
-  //Add a task (grocery item)
-  const addTask = async (task) => {
-    console.log(`adding new task: ${JSON.stringify(task)}`);
-    const res = await fetch('http://localhost:5000/tasks', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(task)
-    })
-
-    const data = await res.json(); //the data that will be returned is just the new task that has been added
-
-    setTasks([...tasks, data]);// now update state of 'tasks' to be what it was before, plus the new task that was just created. This is basically just appending the new task to the end of the current task-list array.
-
-    /* one manual way to create an ID below - commented out - by just generating a random number between 1 and 10,000 to represent the 'unique' ID */
-    // const id = Math.floor(Math.random() * 10000) + 1;
-    // console.log(`id= ${id}`);
-    // const newTask = { id, ...task };
-    // console.log(`newTask:`, newTask);
-    // setTasks([...tasks, newTask]);
-  }
-
-  //Delete a task (grocery item)
-  const deleteTask = async (id) => {
-    //first delete the task from the mock server, then filter it out from the UI
-    await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: 'DELETE'
-    })
-
-    console.log(`will delete: `, id);
-    setTasks(tasks.filter((task) => task.id !== id));
-  }
-
-  //Toggle reminder on/off
-  const toggleReminder = async (id) => {
-    const taskToToggle = await fetchTask(id);
-    const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder }; //just making a copy of the existing task but setting the 'reminder' value to the opposite of whatever it currently was
-
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(updatedTask)
-    })
-
-    const data = await res.json();
-
-    setTasks(tasks.map((task) => task.id === id ? { ...task, reminder: data.reminder } : task))
-  }
-
   return (
     <div className="container">
       <Header title='Grocery List'
-        onAdd={() => setShowAddTask(!showAddTask)}
-        showAddTask={showAddTask}
+        onAdd={() => setShowAddItem(!showAddItem)}
+        showAddItem={showAddItem}
         userName={userName}
         allUserData={allUserData}
         updateUserSession={updateUserSession}
       />
-      {showAddTask && <AddTask onAdd={addTask} onSave={() => setShowAddTask(!showAddTask)} />}
-      {tasks.length > 0 ? <Tasks tasks={tasks}
-        onDelete={deleteTask}
-        onToggle={toggleReminder}
+
+      {groceryItems.length > 0 ? <GroceryItems groceryItems={groceryItems}
       />
         : (
-          'No tasks to show'
+          'No grocery items to show'
         )}
     </div>
   );
 }
 
 Header.defaultProps = {
-  title: 'Awesome Task Tracker'//just here to illustrate that if I didn't pass any props to <Header />, then the default prop would be 'Awesome Task Tracker'
+  title: 'Awesome Grocery-List Tracker'//just here to illustrate that if I didn't pass any props to <Header />, then the default prop would be 'Awesome Task Tracker'
 }
 
 export default App;

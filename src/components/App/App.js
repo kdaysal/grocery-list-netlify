@@ -14,6 +14,7 @@ const App = () => {
 
   //On initial page load, retrieve all users from my api server and update state of 'allUserData' accordingly
   useEffect(() => {
+    console.log(`useEffect called`);
     const getallUserData = async () => {
       console.log(`getallUserData called`);
       const allUserData = await fetchUsers();
@@ -64,12 +65,45 @@ const App = () => {
 
     console.log(`data returned from server: ${JSON.stringify(data)}`);
 
-    //setUser(user);// now update state of 'user' which
+    let newUser = { ...user };
+    setUser(newUser);
   }
 
-  // Delete a single grocery item from a given user's list
+  // DELETE a single grocery item from a given user's list
   const onDelete = async (itemId) => {
     console.log(`ready to delete grocery item ID: ${itemId}`)
+
+    //find the grocery list item (by id) and remove it from the 'user' object
+    console.log(`updated 'user' is now: ${JSON.stringify(user)}`);
+
+    let userId = user._id;
+    console.log(`userId: ${userId}`);
+
+    let filteredGroceryListItems = user.groceryListItems.filter((currentItem) => currentItem._id != itemId);
+
+    console.log(`updated groceryListItem array will be: ${JSON.stringify(filteredGroceryListItems)}`);
+
+    user.groceryListItems = filteredGroceryListItems;
+
+    console.log(`and finally, updated 'user' object is: ${JSON.stringify(user)}`);
+
+    const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+
+    const data = await res.json(); //the data that will be returned
+
+    console.log(`data returned from server after deleting the grocery item: ${JSON.stringify(data)}`);
+
+    // purpose of creating 'newUser' below and setting state of 'user' = 'newUser' is to force the GroceryList component to re-render. Had I merely done `setUser(user)` instead, this would only point setUser to the same OBJECT REFERENCE of 'user' (despite the fact that I updated one of the 'user' object's properties). This way I'm actually updating the state of 'user' to point to a different object (newUser) and thus the component re-renders. This fixed the issue of the just-deleted grocery item still remaining on the UI after hitting the delete button.
+    let newUser = { ...user };
+    setUser(newUser);
+
+    console.log(`latest 'user' is now: ${JSON.stringify(user)}`);
   }
 
   return (

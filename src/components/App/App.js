@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import Header from '../Header/Header';
 import Tasks from '../Tasks/Tasks';
-import AddTask from '../AddTask/AddTask';
+import AddItem from '../AddItem/AddItem';
 import GroceryItems from '../GroceryItems/GroceryItems';
 
 const App = () => {
@@ -67,7 +67,7 @@ const App = () => {
         allUserData={allUserData}
         updateUserSession={updateUserSession}
       />
-      {showAddItem && <AddTask onAdd={addItem} onSave={() => setShowAddItem(!showAddItem)} />}
+      {showAddItem && <AddItem onAdd={addItem} onSave={() => setShowAddItem(!showAddItem)} />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}
       />

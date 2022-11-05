@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddTask = ({ onAdd, onSave }) => {
+const AddItem = ({ onAdd, onSave }) => {
   const [text, setText] = useState('');
   const [aisle, setAisle] = useState('');
   const [reminder, setReminder] = useState(false);
@@ -18,7 +18,7 @@ const AddTask = ({ onAdd, onSave }) => {
     setText('');
     setAisle('');
     setReminder(false);
-    onSave();//set showAddTask = !showAddTask to hide the AddTask form
+    onSave();//set showAddTask = !showAddTask to hide the AddItem form
   }
 
   return (
@@ -52,4 +52,4 @@ const AddTask = ({ onAdd, onSave }) => {
   )
 }
 
-export default AddTask
+export default AddItem

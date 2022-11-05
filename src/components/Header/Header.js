@@ -3,10 +3,10 @@ import Button from '../Button/Button'
 
 const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, updateUserSession }) => {
 
-  console.log(`allUserData.length from Header.js: ${allUserData.length}`); // for testing only -this just proves that the useEffect() hook in App.js had to have completed updating allUserData before passing it as a prop down to the Header.js component.
+  //console.log(`allUserData.length from Header.js: ${allUserData.length}`); // for testing only -this just proves that the useEffect() hook in App.js had to have completed updating allUserData before passing it as a prop down to the Header.js component.
 
   let allUserNames = allUserData.map((x) => x.name);
-  console.log(`allUserNames from Header.js: ${allUserNames}`);
+  //console.log(`allUserNames from Header.js: ${allUserNames}`);
 
   return (
     <header>

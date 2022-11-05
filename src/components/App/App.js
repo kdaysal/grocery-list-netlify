@@ -67,6 +67,11 @@ const App = () => {
     //setUser(user);// now update state of 'user' which
   }
 
+  // Delete a single grocery item from a given user's list
+  const onDelete = async (itemId) => {
+    console.log(`ready to delete grocery item ID: ${itemId}`)
+  }
+
   return (
     <div className="container">
       <Header title='Grocery List'
@@ -83,6 +88,7 @@ const App = () => {
       />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}
+        onDelete={onDelete}
       />
         : (
           'No grocery items to show'

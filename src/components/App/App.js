@@ -1,7 +1,6 @@
 //import React from 'react'; //only needed for class components; not used here
 import { useState, useEffect } from 'react'
 import Header from '../Header/Header';
-//import Tasks from '../Tasks/Tasks';
 import AddItem from '../AddItem/AddItem';
 import GroceryItems from '../GroceryItems/GroceryItems';
 
@@ -14,20 +13,16 @@ const App = () => {
 
   //On initial page load, retrieve all users from my api server and update state of 'allUserData' accordingly
   useEffect(() => {
-    console.log(`useEffect called`);
     const getallUserData = async () => {
       console.log(`getallUserData called`);
       const allUserData = await fetchUsers();
       setallUserData(allUserData);
-      //console.log(`allUserData: ${JSON.stringify(allUserData)}`);
     }
     getallUserData();
   }, [])
 
-
-
   // function to update state of 'userName' string and 'user' object for whichever user is now 'in session'
-  function updateUserSession(userName, user, groceryListItems) {
+  function updateUserSession(userName, user) {
     setUserName(userName);
     console.log(`userName set to: ${userName}`);
     setUser(user);
@@ -42,11 +37,9 @@ const App = () => {
     const res = await fetch('https://damp-forest-55138.herokuapp.com/users');
     const data = await res.json();
     console.log(data);
-    //console.log('data stringified: ' + JSON.stringify(data));
+    //console.log(`data from server: ${JSON.stringify(data)}`);
     return data;
   }
-
-  console.log(`user.groceryListItems (from App.js) is: ${JSON.stringify(user.groceryListItems)}`);
 
   const addItem = async (newItem, userId) => {
     console.log(`adding new item: ${JSON.stringify(newItem)} to userId: ${userId}`);
@@ -61,10 +54,11 @@ const App = () => {
       body: JSON.stringify(user)
     })
 
-    const data = await res.json(); //the data that will be returned is just the new item that has been successfully added
+    const data = await res.json(); //returned from the server - this is ALL data for the given user
 
     console.log(`data returned from server: ${JSON.stringify(data)}`);
 
+    //update state of 'user' by intentionally creating a new object (newUser). This ensures that the component will re-render afterwards.
     let newUser = { ...user };
     setUser(newUser);
   }
@@ -74,18 +68,18 @@ const App = () => {
     console.log(`ready to delete grocery item ID: ${itemId}`)
 
     //find the grocery list item (by id) and remove it from the 'user' object
-    console.log(`updated 'user' is now: ${JSON.stringify(user)}`);
+    //console.log(`updated 'user' is now: ${JSON.stringify(user)}`);
 
     let userId = user._id;
-    console.log(`userId: ${userId}`);
+    //console.log(`userId: ${userId}`);
 
     let filteredGroceryListItems = user.groceryListItems.filter((currentItem) => currentItem._id != itemId);
 
-    console.log(`updated groceryListItem array will be: ${JSON.stringify(filteredGroceryListItems)}`);
+    //console.log(`updated groceryListItem array will be: ${JSON.stringify(filteredGroceryListItems)}`);
 
     user.groceryListItems = filteredGroceryListItems;
 
-    console.log(`and finally, updated 'user' object is: ${JSON.stringify(user)}`);
+    console.log(`newly updated 'user' object will be set to: ${JSON.stringify(user)}`);
 
     const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
       method: 'PATCH',

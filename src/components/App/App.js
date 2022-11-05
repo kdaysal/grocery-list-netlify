@@ -45,7 +45,18 @@ const App = () => {
     return data;
   }
 
-  console.log(`user.groceryListItems is: ${JSON.stringify(user.groceryListItems)}`);
+  console.log(`user.groceryListItems (from App.js) is: ${JSON.stringify(user.groceryListItems)}`);
+
+  const addItem = async (item) => {
+    console.log(`adding new item: ${JSON.stringify(item)}`);
+    // const res = await fetch('https://damp-forest-55138.herokuapp.com/users', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-type': 'application/json'
+    //   },
+    //   body: JSON.stringify(item)
+    //})
+  }
 
   return (
     <div className="container">
@@ -56,6 +67,7 @@ const App = () => {
         allUserData={allUserData}
         updateUserSession={updateUserSession}
       />
+      {showAddItem && <AddTask onAdd={addItem} onSave={() => setShowAddItem(!showAddItem)} />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}
       />

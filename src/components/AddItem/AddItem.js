@@ -1,21 +1,21 @@
 import { useState } from "react";
 
-const AddItem = ({ onAdd, onSave }) => {
-  const [text, setText] = useState('');
+const AddItem = ({ onAdd, onSave, userId }) => {
+  const [itemName, setItemName] = useState('');
   const [aisle, setAisle] = useState('');
   const [reminder, setReminder] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();//prevent the form from submitting to a new page
 
-    if (!text) {
+    if (!itemName) {
       alert('Please add a grocery item');
       return;
     }
 
-    onAdd({ text, aisle, reminder });
+    onAdd({ itemName, aisle, reminder }, userId);
 
-    setText('');
+    setItemName('');
     setAisle('');
     setReminder(false);
     onSave();//set showAddTask = !showAddTask to hide the AddItem form
@@ -24,11 +24,11 @@ const AddItem = ({ onAdd, onSave }) => {
   return (
     <form className='add-form' onSubmit={onSubmit}>
       <div className='form-control'>
-        <label>Task</label>
+        <label>Item</label>
         <input type='text'
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder='Add Task'
+          value={itemName}
+          onChange={(e) => setItemName(e.target.value)}
+          placeholder='Add Item'
         />
       </div>
       <div className='form-control'>

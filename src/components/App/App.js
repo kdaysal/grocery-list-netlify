@@ -47,15 +47,24 @@ const App = () => {
 
   console.log(`user.groceryListItems (from App.js) is: ${JSON.stringify(user.groceryListItems)}`);
 
-  const addItem = async (item) => {
-    console.log(`adding new item: ${JSON.stringify(item)}`);
-    // const res = await fetch('https://damp-forest-55138.herokuapp.com/users', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-type': 'application/json'
-    //   },
-    //   body: JSON.stringify(item)
-    //})
+  const addItem = async (newItem, userId) => {
+    console.log(`adding new item: ${JSON.stringify(newItem)} to userId: ${userId}`);
+    user.groceryListItems.push(newItem);
+
+    console.log(`updated 'user' is now: ${JSON.stringify(user)}`);
+    const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+
+    const data = await res.json(); //the data that will be returned is just the new item that has been successfully added
+
+    console.log(`data returned from server: ${JSON.stringify(data)}`);
+
+    //setUser(user);// now update state of 'user' which
   }
 
   return (
@@ -67,7 +76,11 @@ const App = () => {
         allUserData={allUserData}
         updateUserSession={updateUserSession}
       />
-      {showAddItem && <AddItem onAdd={addItem} onSave={() => setShowAddItem(!showAddItem)} />}
+      {showAddItem && <AddItem
+        onAdd={addItem}
+        onSave={() => setShowAddItem(!showAddItem)}
+        userId={user._id}
+      />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}
       />

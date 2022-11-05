@@ -10,7 +10,7 @@ const GroceryItems = ({ groceryListItems, onDelete, onToggle }) => {
     <>
       {groceryListItems.map((groceryItem) => (
         <GroceryItem
-          key={groceryItem._id}
+          key={groceryItem.itemName} // I was originally using groceryItem._id here, but I'm switching to groceryItem.itemName instead because the ._id won't be created until after the item is added to my db.
           groceryItem={groceryItem}
           onDelete={() => onDelete(groceryItem._id)}
           onToggle={onToggle}

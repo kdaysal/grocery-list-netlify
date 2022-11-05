@@ -1,7 +1,7 @@
 //import React from 'react'; //only needed for class components; not used here
 import { useState, useEffect } from 'react'
 import Header from '../Header/Header';
-import Tasks from '../Tasks/Tasks';
+//import Tasks from '../Tasks/Tasks';
 import AddItem from '../AddItem/AddItem';
 import GroceryItems from '../GroceryItems/GroceryItems';
 
@@ -79,7 +79,7 @@ const App = () => {
 }
 
 Header.defaultProps = {
-  title: 'Awesome Grocery-List Tracker'//just here to illustrate that if I didn't pass any props to <Header />, then the default prop would be 'Awesome Task Tracker'
+  title: 'Awesome Grocery-List Tracker'//just here to illustrate that if I didn't pass any props to <Header />, then the default prop would be 'Awesome Grocery-List Tracker'
 }
 
 export default App;

@@ -15,7 +15,7 @@ const App = () => {
   //On initial page load, retrieve all users from my api server and update state of 'allUserData' accordingly
   useEffect(() => {
     const getallUserData = async () => {
-      console.log(`getallUserData called`);
+      //console.log(`getallUserData called`);
       const allUserData = await fetchUsers();
       setallUserData(allUserData);
     }
@@ -37,7 +37,7 @@ const App = () => {
   const fetchUsers = async () => {
     const res = await fetch('https://damp-forest-55138.herokuapp.com/users');
     const data = await res.json();
-    console.log(data);
+    //console.log(data);
     //console.log(`data from server: ${JSON.stringify(data)}`);
     return data;
   }
@@ -162,6 +162,7 @@ const App = () => {
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}
         onDelete={onDelete}
         onToggle={onToggle}
+        visibilityFilter={visibilityFilter}
       />
         : (
           'No grocery items to show'

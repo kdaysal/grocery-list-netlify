@@ -137,8 +137,9 @@ const App = () => {
     console.log(`data returned from server after deleting the grocery item: ${JSON.stringify(data)}`);
   }
 
-  const updateVisibilityFilter = () => {
-    console.log(`updateVisibilityFilter called`);
+  const updateVisibilityFilter = (newVisibility) => {
+    console.log(`updateVisibilityFilter called with newVisibility: ${newVisibility}`);
+    setVisibilityFilter(newVisibility);
   }
 
   return (

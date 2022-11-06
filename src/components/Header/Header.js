@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'//prop-types is totally optional for a small app like this - I'm adding it here for reference
 import Button from '../Button/Button'
 
-const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, updateUserSession, visibilityFilter }) => {
+const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, updateUserSession, visibilityFilter, updateVisibilityFilter }) => {
 
   console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
 
@@ -51,7 +51,11 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
         <Button
           btnText={'See All'}
           btnColor={'orange'}
-          onClick={() => console.log(`See All clicked`)}
+          onClick={() => {
+            console.log(`See All clicked`)
+            updateVisibilityFilter('all');
+          }
+          }
         />
       )
       }
@@ -61,7 +65,11 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
         <Button
           btnText={'Items I need'}
           btnColor={'orange'}
-          onClick={() => console.log(`Items I need clicked`)}
+          onClick={() => {
+            console.log(`Items I need clicked`)
+            updateVisibilityFilter('reminder-only');
+          }
+          }
         />
       )
       }
@@ -71,7 +79,11 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
         <Button
           btnText={'Items I have'}
           btnColor={'orange'}
-          onClick={() => console.log(`Items I have clicked`)}
+          onClick={() => {
+            console.log(`Items I have clicked`)
+            updateVisibilityFilter('no-reminder');
+          }
+          }
         />
       )
       }

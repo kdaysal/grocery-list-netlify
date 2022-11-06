@@ -3,9 +3,11 @@ import { useState, useEffect } from 'react'
 import Header from '../Header/Header';
 import AddItem from '../AddItem/AddItem';
 import GroceryItems from '../GroceryItems/GroceryItems';
+import EditItem from '../EditItem/EditItem';
 
 const App = () => {
   const [showAddItem, setShowAddItem] = useState(false);
+  const [showEditItem, setShowEditItem] = useState(false);
   const [allUserData, setallUserData] = useState([]); // object to hold the entirety of all data from my API
   const [allUserNames, setAllUserNames] = useState([]); // an array to hold all unique user names
   const [userName, setUserName] = useState(''); // string to hold the current user name that is 'in session'
@@ -65,6 +67,10 @@ const App = () => {
     let newUser = { ...user };
     setUser(newUser);
   }
+
+
+
+
 
   // DELETE a single grocery item from a given user's list
   const onDelete = async (itemId) => {
@@ -142,8 +148,29 @@ const App = () => {
     setVisibilityFilter(newVisibility);
   }
 
-  const editGroceryItem = (groceryItemId) => {
-    console.log(`editing Grocery Item ID: ${groceryItemId}`)
+  // EDIT a single grocery item
+
+  const editGroceryItem = async (groceryItemId) => {
+    setShowEditItem(!showEditItem);
+    console.log(`editGroceryItem function called`)
+    console.log(`editing Grocery Item ID: ${groceryItemId}`);
+
+
+    // UPDATE DATABASE (pull this out into its own method later)
+    // const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
+    //   method: 'PATCH',
+    //   headers: {
+    //     'Content-type': 'application/json'
+    //   },
+    //   body: JSON.stringify(updatedUser)
+    // })
+
+    // const data = await res.json(); //returned from the server - this is ALL data for the given user
+
+    // console.log(`data returned from server: ${JSON.stringify(data)}`);
+
+    // let newUser = { ...updatedUser };
+    // setUser(newUser);
   }
 
   return (
@@ -163,11 +190,15 @@ const App = () => {
         userId={user._id}
       />}
 
+      {showEditItem && <EditItem
+
+      />}
+
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}
         onDelete={onDelete}
         onToggle={onToggle}
         visibilityFilter={visibilityFilter}
-        onEdit={editGroceryItem}
+        editGrogeryItem={editGroceryItem}
       />
         : (
           'No grocery items to show'

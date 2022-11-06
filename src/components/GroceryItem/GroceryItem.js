@@ -8,7 +8,7 @@ const GroceryItem = ({
   groceryItem,
   onDelete,
   onToggle,
-  onEdit
+  editGrogeryItem,
 }) => {
 
   console.log(`groceryItem is: ${JSON.stringify(groceryItem)}`);
@@ -24,7 +24,10 @@ const GroceryItem = ({
         />
         }
         <AiOutlineEdit
-          onClick={() => onEdit(groceryItem._id)}
+          onClick={() => {
+            editGrogeryItem(groceryItem._id)
+          }
+          }
         />
         <FaTimes style={{ color: 'red', cursor: 'pointer' }}
           onClick={() => onDelete(groceryItem._id)}

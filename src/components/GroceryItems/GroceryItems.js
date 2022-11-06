@@ -7,7 +7,7 @@ const GroceryItems = ({
   onDelete,
   onToggle,
   visibilityFilter,
-  onEdit
+  editGrogeryItem,
 }) => {
 
   // Only display items based on state of 'visibility filter'
@@ -27,7 +27,7 @@ const GroceryItems = ({
           groceryItem={groceryItem}
           onDelete={() => onDelete(groceryItem._id)}
           onToggle={onToggle}
-          onEdit={onEdit}
+          editGrogeryItem={editGrogeryItem}
         />
       ))}
     </>

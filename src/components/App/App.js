@@ -46,6 +46,8 @@ const App = () => {
     user.groceryListItems.push(newItem);
 
     console.log(`updated 'user' is now: ${JSON.stringify(user)}`);
+
+    // UPDATE DATABASE (pull this out into its own method later)
     const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
       method: 'PATCH',
       headers: {
@@ -81,6 +83,7 @@ const App = () => {
 
     console.log(`newly updated 'user' object will be set to: ${JSON.stringify(user)}`);
 
+    // UPDATE DATABASE (pull this out into its own method later)
     const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
       method: 'PATCH',
       headers: {
@@ -94,12 +97,13 @@ const App = () => {
     console.log(`data returned from server after deleting the grocery item: ${JSON.stringify(data)}`);
 
     // purpose of creating 'newUser' below and setting state of 'user' = 'newUser' is to force the GroceryList component to re-render. Had I merely done `setUser(user)` instead, this would only point setUser to the same OBJECT REFERENCE of 'user' (despite the fact that I updated one of the 'user' object's properties). This way I'm actually updating the state of 'user' to point to a different object (newUser) and thus the component re-renders. This fixed the issue of the just-deleted grocery item still remaining on the UI after hitting the delete button.
-    let newUser = { ...user };
-    setUser(newUser);
+    let updatedUser = { ...user };
+    setUser(updatedUser);
 
-    console.log(`latest 'user' is now: ${JSON.stringify(user)}`);
+    //console.log(`latest 'user' is now: ${JSON.stringify(user)}`);
   }
 
+  // TOGGLE reminder to be the opposite of whatever it was previously
   const onToggle = async (groceryItemId) => {
     console.log(`onToggle called for groceryItemId: (${groceryItemId})`);
 
@@ -110,6 +114,26 @@ const App = () => {
       }
     })
     console.log(`updated user.groceryListItems = ${JSON.stringify(user.groceryListItems)}`);
+
+    //update state of user
+    let updatedUser = { ...user };
+    setUser(updatedUser);
+
+    //console.log(`latest 'user' is now: ${JSON.stringify(user)}`);
+
+    // UPDATE DATABASE (pull this out into its own method later)
+    let userId = user._id;
+    const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+
+    const data = await res.json(); //the data that will be returned
+
+    console.log(`data returned from server after deleting the grocery item: ${JSON.stringify(data)}`);
   }
 
   return (

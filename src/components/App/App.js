@@ -100,6 +100,18 @@ const App = () => {
     console.log(`latest 'user' is now: ${JSON.stringify(user)}`);
   }
 
+  const onToggle = async (groceryItemId) => {
+    console.log(`onToggle called for groceryItemId: (${groceryItemId})`);
+
+    // loop through each grocery list item and flip 'reminder' to be the opposite of whatever it was for the specific groceryItemId that is passed into the function
+    user.groceryListItems.forEach((item) => {
+      if (item._id === groceryItemId) {
+        item.reminder = !item.reminder;
+      }
+    })
+    console.log(`updated user.groceryListItems = ${JSON.stringify(user.groceryListItems)}`);
+  }
+
   return (
     <div className="container">
       <Header title='Grocery List'
@@ -117,6 +129,7 @@ const App = () => {
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}
         onDelete={onDelete}
+        onToggle={onToggle}
       />
         : (
           'No grocery items to show'

@@ -8,9 +8,13 @@ const GroceryItem = ({ groceryItem, onDelete, onToggle }) => {
   return (
     <div className={`groceryItem ${groceryItem.reminder ? 'reminder' : ''}`} onDoubleClick={() => onToggle(groceryItem._id)}>
       <h3>{groceryItem.itemName}
-        {!groceryItem.reminder && <BsToggleOff />
+        {!groceryItem.reminder && <BsToggleOff
+          onClick={() => onToggle(groceryItem._id)}
+        />
         }
-        {groceryItem.reminder && <BsToggleOn />
+        {groceryItem.reminder && <BsToggleOn
+          onClick={() => onToggle(groceryItem._id)}
+        />
         }
         <FaTimes style={{ color: 'red', cursor: 'pointer' }}
           onClick={() => onDelete(groceryItem._id)}

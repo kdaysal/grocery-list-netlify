@@ -8,7 +8,8 @@ const GroceryItem = ({
   groceryItem,
   onDelete,
   onToggle,
-  editGrogeryItem,
+  editGroceryItem, //calls editGroceryItem function in App.js
+  onEdit //flips the state of showEditItems to its opposite
 }) => {
 
   console.log(`groceryItem is: ${JSON.stringify(groceryItem)}`);
@@ -25,7 +26,8 @@ const GroceryItem = ({
         }
         <AiOutlineEdit
           onClick={() => {
-            editGrogeryItem(groceryItem._id)
+            editGroceryItem(groceryItem._id);
+            onEdit();
           }
           }
         />

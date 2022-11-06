@@ -151,7 +151,6 @@ const App = () => {
   // EDIT a single grocery item
 
   const editGroceryItem = async (groceryItemId) => {
-    setShowEditItem(!showEditItem);
     console.log(`editGroceryItem function called`)
     console.log(`editing Grocery Item ID: ${groceryItemId}`);
 
@@ -198,7 +197,8 @@ const App = () => {
         onDelete={onDelete}
         onToggle={onToggle}
         visibilityFilter={visibilityFilter}
-        editGrogeryItem={editGroceryItem}
+        editGroceryItem={editGroceryItem}
+        onEdit={() => setShowEditItem(!showEditItem)}
       />
         : (
           'No grocery items to show'

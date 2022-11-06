@@ -21,7 +21,7 @@ const EditItem = ({ onEdit, onSave, userId }) => {
   return (
     <form className='edit-form' onSubmit={onSubmit}>
       <div className='form-control'>
-        <label>Item</label>
+        <label>Edit Item</label>
         <input type='text'
           value={itemName}
           onChange={(e) => setItemName(e.target.value)}
@@ -29,7 +29,7 @@ const EditItem = ({ onEdit, onSave, userId }) => {
         />
       </div>
       <div className='form-control'>
-        <label>Aisle</label>
+        <label>Edit Aisle</label>
         <input type='text'
           placeholder={aisle}
           value={aisle}

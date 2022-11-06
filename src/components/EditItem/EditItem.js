@@ -1,21 +1,25 @@
 import { useState } from "react";
 
-const EditItem = ({ onEdit, onSave, userId }) => {
-  const [itemName, setItemName] = useState('');
+const EditItem = ({ user, groceryItemId, groceryItemName }) => {
+  const [itemName, setItemName] = useState(groceryItemName);
   const [aisle, setAisle] = useState('');
   const [reminder, setReminder] = useState(false);
+
+  //set itemName, aisle, and reminder to what is being passed in from 'user' and 'groceryItemId'...
+  console.log(`groceryItemName == ${groceryItemName}`);
+
+
+  console.log(`groceryItemId passed to EditItem component: ${groceryItemId}`);
 
   const onSubmit = (e) => {
     e.preventDefault();//prevent the form from submitting to a new page
 
     console.log(`edit item form was submitted`)
 
-    // onEdit({ itemName, aisle, reminder }, userId);
-
     // setItemName('');
     // setAisle('');
     // setReminder(false);
-    // onSave();//set showAddTask = !showAddTask to hide the EditItem form
+    // onSave();//set showEditItem = !showEditItem to hide the EditItem form
   }
 
   return (

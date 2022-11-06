@@ -26,7 +26,7 @@ const GroceryItem = ({
         }
         <AiOutlineEdit
           onClick={() => {
-            editGroceryItem(groceryItem._id);
+            editGroceryItem(groceryItem._id, groceryItem.itemName);
             onEdit();
           }
           }

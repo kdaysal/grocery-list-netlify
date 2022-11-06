@@ -13,6 +13,8 @@ const App = () => {
   const [userName, setUserName] = useState(''); // string to hold the current user name that is 'in session'
   const [user, setUser] = useState([]); // array to hold all data for only the current user who is 'in session'
   const [visibilityFilter, setVisibilityFilter] = useState('all');
+  const [groceryItemId, setGroceryItemId] = useState('');// stores an individual grocery item ID to be used with the editGroceryItem function
+  const [groceryItemName, setGroceryItemName] = useState('');// stores an individual grocery item ID to be used with the editGroceryItem function
 
   //On initial page load, retrieve all users from my api server and update state of 'allUserData' accordingly
   useEffect(() => {
@@ -150,9 +152,11 @@ const App = () => {
 
   // EDIT a single grocery item
 
-  const editGroceryItem = async (groceryItemId) => {
+  const editGroceryItem = async (groceryItemId, groceryItemName) => {
     console.log(`editGroceryItem function called`)
     console.log(`editing Grocery Item ID: ${groceryItemId}`);
+    setGroceryItemId(groceryItemId);
+    setGroceryItemName(groceryItemName);
 
 
     // UPDATE DATABASE (pull this out into its own method later)
@@ -190,7 +194,9 @@ const App = () => {
       />}
 
       {showEditItem && <EditItem
-
+        user={user}
+        groceryItemId={groceryItemId}
+        groceryItemName={groceryItemName}
       />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}

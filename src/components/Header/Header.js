@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'//prop-types is totally optional for a small app like this - I'm adding it here for reference
 import Button from '../Button/Button'
 
-const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, updateUserSession }) => {
+const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, updateUserSession, visibilityFilter }) => {
 
-  //console.log(`allUserData.length from Header.js: ${allUserData.length}`); // for testing only -this just proves that the useEffect() hook in App.js had to have completed updating allUserData before passing it as a prop down to the Header.js component.
+  console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
 
   let allUserNames = allUserData.map((x) => x.name);
   //console.log(`allUserNames from Header.js: ${allUserNames}`);
@@ -17,7 +17,7 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
       {/* Only show the Add button if no current 'user' is set */}
       {userName && (
         <Button
-          btnText={showAddTask ? 'Close' : 'Add'}
+          btnText={showAddTask ? 'Close' : 'Add Item'}
           btnColor={showAddTask ? 'blue' : 'green'}
           onClick={onAdd}
         />
@@ -35,6 +35,7 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
           </Button>)
       )
       }
+
       {/* If (user) then show a 'Change User button' */}
       {userName && (
         <Button
@@ -44,6 +45,37 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
         />
       )
       }
+
+      {/* Display 'visibility filter' buttons to let the user choose whether they want to see only 'reminder' items, only '!reminder' items, or 'all' items */}
+      {((userName) && (visibilityFilter != 'all')) && (
+        <Button
+          btnText={'See All'}
+          btnColor={'orange'}
+          onClick={() => console.log(`See All clicked`)}
+        />
+      )
+      }
+
+      {/* Only see 'Items I need' (reminder-only) */}
+      {((userName) && (visibilityFilter != 'reminder-only')) && (
+        <Button
+          btnText={'Items I need'}
+          btnColor={'orange'}
+          onClick={() => console.log(`Items I need clicked`)}
+        />
+      )
+      }
+
+      {/* Only see 'Items I have' (no-reminder) */}
+      {((userName) && (visibilityFilter != 'no-reminder')) && (
+        <Button
+          btnText={'Items I have'}
+          btnColor={'orange'}
+          onClick={() => console.log(`Items I have clicked`)}
+        />
+      )
+      }
+
     </header>
   )
 }

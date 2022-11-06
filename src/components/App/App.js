@@ -10,6 +10,7 @@ const App = () => {
   const [allUserNames, setAllUserNames] = useState([]); // an array to hold all unique user names
   const [userName, setUserName] = useState(''); // string to hold the current user name that is 'in session'
   const [user, setUser] = useState([]); // array to hold all data for only the current user who is 'in session'
+  const [visibilityFilter, setVisibilityFilter] = useState('all');
 
   //On initial page load, retrieve all users from my api server and update state of 'allUserData' accordingly
   useEffect(() => {
@@ -136,6 +137,10 @@ const App = () => {
     console.log(`data returned from server after deleting the grocery item: ${JSON.stringify(data)}`);
   }
 
+  const updateVisibilityFilter = () => {
+    console.log(`updateVisibilityFilter called`);
+  }
+
   return (
     <div className="container">
       <Header title='Grocery List'
@@ -144,6 +149,8 @@ const App = () => {
         userName={userName}
         allUserData={allUserData}
         updateUserSession={updateUserSession}
+        visibilityFilter={visibilityFilter}
+        updateVisibilityFilter={updateVisibilityFilter}
       />
       {showAddItem && <AddItem
         onAdd={addItem}

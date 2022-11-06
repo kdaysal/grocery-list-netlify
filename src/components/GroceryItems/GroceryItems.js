@@ -2,7 +2,13 @@
 
 import GroceryItem from "../GroceryItem/GroceryItem"
 
-const GroceryItems = ({ groceryListItems, onDelete, onToggle, visibilityFilter }) => {
+const GroceryItems = ({
+  groceryListItems,
+  onDelete,
+  onToggle,
+  visibilityFilter,
+  onEdit
+}) => {
 
   // Only display items based on state of 'visibility filter'
   let filteredList = groceryListItems.filter((item) => {
@@ -21,6 +27,7 @@ const GroceryItems = ({ groceryListItems, onDelete, onToggle, visibilityFilter }
           groceryItem={groceryItem}
           onDelete={() => onDelete(groceryItem._id)}
           onToggle={onToggle}
+          onEdit={onEdit}
         />
       ))}
     </>

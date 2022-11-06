@@ -142,6 +142,10 @@ const App = () => {
     setVisibilityFilter(newVisibility);
   }
 
+  const editGroceryItem = (groceryItemId) => {
+    console.log(`editing Grocery Item ID: ${groceryItemId}`)
+  }
+
   return (
     <div className="container">
       <Header title='Grocery List'
@@ -163,6 +167,7 @@ const App = () => {
         onDelete={onDelete}
         onToggle={onToggle}
         visibilityFilter={visibilityFilter}
+        onEdit={editGroceryItem}
       />
         : (
           'No grocery items to show'

@@ -1,7 +1,17 @@
 import PropTypes from 'prop-types'//prop-types is totally optional for a small app like this - I'm adding it here for reference
 import Button from '../Button/Button'
 
-const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, updateUserSession, visibilityFilter, updateVisibilityFilter }) => {
+const Header = ({
+  title,
+  onAdd,
+  showAddTask,
+  userName,
+  user,
+  allUserData,
+  updateUserSession,
+  visibilityFilter,
+  updateVisibilityFilter
+}) => {
 
   console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
 
@@ -14,15 +24,6 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
         '- ' + userName
         : ''}
       </h1>
-      {/* Only show the Add button if no current 'user' is set */}
-      {userName && (
-        <Button
-          btnText={showAddTask ? 'Close' : 'Add Item'}
-          btnColor={showAddTask ? 'blue' : 'green'}
-          onClick={onAdd}
-        />
-      )
-      }
       {/* If no current 'user' is set, present buttons with all possible user names for the person to choose from (i.e. to set a single 'user')*/}
       {!userName && (
         allUserData.map((user, index) =>
@@ -42,6 +43,16 @@ const Header = ({ title, onAdd, showAddTask, userName, user, allUserData, update
           btnText={'Change User'}
           btnColor={'blue'}
           onClick={() => updateUserSession('', [])}
+        />
+      )
+      }
+
+      {/* Only show the Add button if no current 'user' is set */}
+      {userName && (
+        <Button
+          btnText={showAddTask ? 'Close' : 'Add Item'}
+          btnColor={showAddTask ? 'blue' : 'green'}
+          onClick={onAdd}
         />
       )
       }

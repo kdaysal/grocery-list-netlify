@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-const EditItem = ({ user, groceryItemId, groceryItemName }) => {
+const EditItem = ({ user, groceryItemId, groceryItemName, groceryItemAisle, groceryItemReminder }) => {
   const [itemName, setItemName] = useState(groceryItemName);
-  const [aisle, setAisle] = useState('');
-  const [reminder, setReminder] = useState(false);
+  const [aisle, setAisle] = useState(groceryItemAisle);
+  const [reminder, setReminder] = useState(groceryItemReminder);
 
   //set itemName, aisle, and reminder to what is being passed in from 'user' and 'groceryItemId'...
   console.log(`groceryItemName == ${groceryItemName}`);

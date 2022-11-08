@@ -13,8 +13,12 @@ const App = () => {
   const [userName, setUserName] = useState(''); // string to hold the current user name that is 'in session'
   const [user, setUser] = useState([]); // array to hold all data for only the current user who is 'in session'
   const [visibilityFilter, setVisibilityFilter] = useState('all');
+
+  // Below states are used for editing a single grocery item for the in-session user
   const [groceryItemId, setGroceryItemId] = useState('');// stores an individual grocery item ID to be used with the editGroceryItem function
   const [groceryItemName, setGroceryItemName] = useState('');// stores an individual grocery item ID to be used with the editGroceryItem function
+  const [groceryItemAisle, setGroceryItemAisle] = useState('');// stores an individual grocery item Aisle to be used with the editGroceryItem function
+  const [groceryItemReminder, setGroceryItemReminder] = useState('');// stores an individual grocery item Reminder boolean to be used with the editGroceryItem function
 
   //On initial page load, retrieve all users from my api server and update state of 'allUserData' accordingly
   useEffect(() => {
@@ -152,11 +156,13 @@ const App = () => {
 
   // EDIT a single grocery item
 
-  const editGroceryItem = async (groceryItemId, groceryItemName) => {
+  const editGroceryItem = async (groceryItemId, groceryItemName, groceryItemAisle, groceryItemReminder) => {
     console.log(`editGroceryItem function called`)
     console.log(`editing Grocery Item ID: ${groceryItemId}`);
     setGroceryItemId(groceryItemId);
     setGroceryItemName(groceryItemName);
+    setGroceryItemAisle(groceryItemAisle);
+    setGroceryItemReminder(groceryItemReminder);
 
 
     // UPDATE DATABASE (pull this out into its own method later)
@@ -197,6 +203,8 @@ const App = () => {
         user={user}
         groceryItemId={groceryItemId}
         groceryItemName={groceryItemName}
+        groceryItemAisle={groceryItemAisle}
+        groceryItemReminder={groceryItemReminder}
       />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}

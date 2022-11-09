@@ -6,7 +6,8 @@ const EditItem = ({
   groceryItemName,
   groceryItemAisle,
   groceryItemReminder,
-  editItem
+  editItem,
+  onSave
 }) => {
   const [oldItemName, setOldItemName] = useState(groceryItemName);
   const [itemName, setItemName] = useState(groceryItemName); //state of the newly edited item name
@@ -26,10 +27,10 @@ const EditItem = ({
 
     console.log(`edit item form was submitted`)
 
-    //  setItemName('');
-    //  setAisle('');
-    //  setReminder(false);
-    //  onSave();//set showEditItem = !showEditItem to hide the EditItem form
+    setItemName('');
+    setAisle('');
+    setReminder(false);
+    onSave();//set showEditItem = !showEditItem to hide the EditItem form
   }
 
   return (

@@ -74,59 +74,44 @@ const App = () => {
     setUser(newUser);
   }
 
-
   // EDIT a single grocery item from a given user's list
   const editItem = async (newItem, oldItemName) => {
     const userId = user._id;
-
 
     console.log(`newItem object received to editItem function in App.js: ${JSON.stringify(newItem)} for userId: ${userId}`);
     console.log(`user still: ${JSON.stringify(user)}`);
     console.log(`old item name: ${oldItemName}`)
 
+    // find the index of the old grocery item (by its name)
     const index = user.groceryListItems.findIndex(item => item.itemName == oldItemName);
     console.log(`index: ${index}`);
 
-    //THIS IS NOW WORKING (I'm getting the correct index back of the grocery item that I want to replace with my newItem)
-
+    // update user object by replacing the old grocery item with the new one (and leaving the other grocery items unmodified)
     user.groceryListItems[index] = newItem;
 
+    //update state of 'user' object
     let newUser = { ...user };
     setUser(newUser);
 
     console.log(`user is now: ${JSON.stringify(user)}`);
 
+    // UPDATE DATABASE (pull this out into its own method later)
+    const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
 
+    const data = await res.json(); //returned from the server - this is ALL data for the given user
 
-    /*
-    
-      console.log(`updated 'user' is now: ${JSON.stringify(user)}`);
-    
-      // UPDATE DATABASE (pull this out into its own method later)
-      const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(user)
-      })
-    
-      const data = await res.json(); //returned from the server - this is ALL data for the given user
-    
-      console.log(`data returned from server: ${JSON.stringify(data)}`);
-    
-      //update state of 'user' by intentionally creating a new object (newUser). This ensures that the component will re-render afterwards.
-      let newUser = { ...user };
-      setUser(newUser);
-    
-      */
+    console.log(`data returned from server!!: ${JSON.stringify(data)}`);
   }
-
 
   // DELETE a single grocery item from a given user's list
   const onDelete = async (itemId) => {
     console.log(`ready to delete grocery item ID: ${itemId}`)
-
     //find the grocery list item (by id) and remove it from the 'user' object
     //console.log(`updated 'user' is now: ${JSON.stringify(user)}`);
 
@@ -251,6 +236,7 @@ const App = () => {
         groceryItemAisle={groceryItemAisle}
         groceryItemReminder={groceryItemReminder}
         editItem={editItem}
+        onSave={() => setShowEditItem(!showEditItem)}
       />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}

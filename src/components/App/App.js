@@ -75,7 +75,52 @@ const App = () => {
   }
 
 
+  // EDIT a single grocery item from a given user's list
+  const editItem = async (newItem, oldItemName) => {
+    const userId = user._id;
 
+
+    console.log(`newItem object received to editItem function in App.js: ${JSON.stringify(newItem)} for userId: ${userId}`);
+    console.log(`user still: ${JSON.stringify(user)}`);
+    console.log(`old item name: ${oldItemName}`)
+
+    const index = user.groceryListItems.findIndex(item => item.itemName == oldItemName);
+    console.log(`index: ${index}`);
+
+    //THIS IS NOW WORKING (I'm getting the correct index back of the grocery item that I want to replace with my newItem)
+
+    user.groceryListItems[index] = newItem;
+
+    let newUser = { ...user };
+    setUser(newUser);
+
+    console.log(`user is now: ${JSON.stringify(user)}`);
+
+
+
+    /*
+    
+      console.log(`updated 'user' is now: ${JSON.stringify(user)}`);
+    
+      // UPDATE DATABASE (pull this out into its own method later)
+      const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+    
+      const data = await res.json(); //returned from the server - this is ALL data for the given user
+    
+      console.log(`data returned from server: ${JSON.stringify(data)}`);
+    
+      //update state of 'user' by intentionally creating a new object (newUser). This ensures that the component will re-render afterwards.
+      let newUser = { ...user };
+      setUser(newUser);
+    
+      */
+  }
 
 
   // DELETE a single grocery item from a given user's list
@@ -205,6 +250,7 @@ const App = () => {
         groceryItemName={groceryItemName}
         groceryItemAisle={groceryItemAisle}
         groceryItemReminder={groceryItemReminder}
+        editItem={editItem}
       />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}

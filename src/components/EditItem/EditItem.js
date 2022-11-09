@@ -1,7 +1,15 @@
 import { useState } from "react";
 
-const EditItem = ({ user, groceryItemId, groceryItemName, groceryItemAisle, groceryItemReminder }) => {
-  const [itemName, setItemName] = useState(groceryItemName);
+const EditItem = ({
+  user,
+  groceryItemId,
+  groceryItemName,
+  groceryItemAisle,
+  groceryItemReminder,
+  editItem
+}) => {
+  const [oldItemName, setOldItemName] = useState(groceryItemName);
+  const [itemName, setItemName] = useState(groceryItemName); //state of the newly edited item name
   const [aisle, setAisle] = useState(groceryItemAisle);
   const [reminder, setReminder] = useState(groceryItemReminder);
 
@@ -13,13 +21,15 @@ const EditItem = ({ user, groceryItemId, groceryItemName, groceryItemAisle, groc
 
   const onSubmit = (e) => {
     e.preventDefault();//prevent the form from submitting to a new page
+    console.log(`now passing updated item: ${itemName, aisle, reminder} to editItem function in App.js`)
+    editItem({ itemName, aisle, reminder }, oldItemName)
 
     console.log(`edit item form was submitted`)
 
-    // setItemName('');
-    // setAisle('');
-    // setReminder(false);
-    // onSave();//set showEditItem = !showEditItem to hide the EditItem form
+    //  setItemName('');
+    //  setAisle('');
+    //  setReminder(false);
+    //  onSave();//set showEditItem = !showEditItem to hide the EditItem form
   }
 
   return (

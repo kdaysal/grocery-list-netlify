@@ -8,7 +8,8 @@ const GroceryItems = ({
   onToggle,
   visibilityFilter,
   editGroceryItem,
-  onEdit
+  onEdit,
+  showEditItem
 }) => {
 
   // Only display items based on state of 'visibility filter'
@@ -30,6 +31,7 @@ const GroceryItems = ({
           onToggle={onToggle}
           editGroceryItem={editGroceryItem}
           onEdit={onEdit}
+          showEditItem={showEditItem}
         />
       ))}
     </>

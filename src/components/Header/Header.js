@@ -13,7 +13,7 @@ const Header = ({
   updateVisibilityFilter
 }) => {
 
-  console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
+  //console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
 
   let allUserNames = allUserData.map((x) => x.name);
   //console.log(`allUserNames from Header.js: ${allUserNames}`);

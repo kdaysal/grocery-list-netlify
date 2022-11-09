@@ -237,6 +237,7 @@ const App = () => {
         groceryItemReminder={groceryItemReminder}
         editItem={editItem}
         onSave={() => setShowEditItem(!showEditItem)}
+        showEditItem={showEditItem}
       />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}
@@ -245,6 +246,8 @@ const App = () => {
         visibilityFilter={visibilityFilter}
         editGroceryItem={editGroceryItem}
         onEdit={() => setShowEditItem(!showEditItem)}
+        showEditItem={showEditItem}
+
       />
         : (
           'No grocery items to show'

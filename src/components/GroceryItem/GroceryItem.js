@@ -9,10 +9,11 @@ const GroceryItem = ({
   onDelete,
   onToggle,
   editGroceryItem, //calls editGroceryItem function in App.js
-  onEdit //flips the state of showEditItems to its opposite
+  onEdit, //flips the state of showEditItems to its opposite
+  showEditItem
 }) => {
 
-  console.log(`groceryItem is: ${JSON.stringify(groceryItem)}`);
+  // console.log(`groceryItem is: ${JSON.stringify(groceryItem)}`);
   return (
     <div className={`groceryItem ${groceryItem.reminder ? 'reminder' : ''}`} onDoubleClick={() => onToggle(groceryItem._id)}>
       <h3>{groceryItem.itemName}
@@ -24,13 +25,13 @@ const GroceryItem = ({
           onClick={() => onToggle(groceryItem._id)}
         />
         }
-        <AiOutlineEdit
+        {!showEditItem && <AiOutlineEdit
           onClick={() => {
             editGroceryItem(groceryItem._id, groceryItem.itemName, groceryItem.aisle, groceryItem.reminder);
             onEdit();
           }
           }
-        />
+        />}
         <FaTimes style={{ color: 'red', cursor: 'pointer' }}
           onClick={() => onDelete(groceryItem._id)}
         />

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../Button/Button";
 
 const EditItem = ({
   user,
@@ -7,7 +8,8 @@ const EditItem = ({
   groceryItemAisle,
   groceryItemReminder,
   editItem,
-  onSave
+  onSave,
+  showEditItem
 }) => {
   const [oldItemName, setOldItemName] = useState(groceryItemName);
   const [itemName, setItemName] = useState(groceryItemName); //state of the newly edited item name
@@ -60,6 +62,12 @@ const EditItem = ({
         />
       </div>
       <input className='btn btn-block' type='submit' value='Save Item' />
+      <Button
+        btnText={'Cancel'}
+        btnColor={'orange'}
+        onClick={() => onSave()}
+      >
+      </Button>
     </form>
   )
 }

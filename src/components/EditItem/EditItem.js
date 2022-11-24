@@ -11,14 +11,13 @@ const EditItem = ({
   onSave,
   showEditItem
 }) => {
-  const [oldItemName, setOldItemName] = useState(groceryItemName);
+  const [oldItemName, setOldItemName] = useState(groceryItemName); //state of the original grocery item prior to the upcoming change/modification
   const [itemName, setItemName] = useState(groceryItemName); //state of the newly edited item name
   const [aisle, setAisle] = useState(groceryItemAisle);
   const [reminder, setReminder] = useState(groceryItemReminder);
 
   //set itemName, aisle, and reminder to what is being passed in from 'user' and 'groceryItemId'...
   console.log(`groceryItemName == ${groceryItemName}`);
-
 
   console.log(`groceryItemId passed to EditItem component: ${groceryItemId}`);
 

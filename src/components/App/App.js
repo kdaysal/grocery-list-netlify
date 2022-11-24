@@ -39,6 +39,26 @@ const App = () => {
     return data;
   }
 
+  //takes in a userId and updates the 'user' object in the database to match whatever the current state of 'user' in App.js is. This works because this function will only be called AFTER state of 'user' has been updated in App.js.
+  const updateDatabase = async (userId) => {
+    console.log(`updateDatabase function called in App.js`);
+    const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+
+    const data = await res.json(); //returned from the server - this is ALL data for the given user
+
+    console.log(`data returned from server: ${JSON.stringify(data)}`);
+
+    //update state of 'user' by intentionally creating a new object (newUser). This ensures that the component will re-render afterwards.
+    let newUser = { ...user };
+    setUser(newUser);
+  }
+
   // function to update state of 'userName' string and 'user' object for whichever user is now 'in session'
   function updateUserSession(userName, user) {
     setUserName(userName);
@@ -56,22 +76,8 @@ const App = () => {
 
     console.log(`updated 'user' is now: ${JSON.stringify(user)}`);
 
-    // UPDATE DATABASE (pull this out into its own method later)
-    const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-
-    const data = await res.json(); //returned from the server - this is ALL data for the given user
-
-    console.log(`data returned from server: ${JSON.stringify(data)}`);
-
-    //update state of 'user' by intentionally creating a new object (newUser). This ensures that the component will re-render afterwards.
-    let newUser = { ...user };
-    setUser(newUser);
+    //call updateDatabase function to update 'user' in the db
+    updateDatabase(userId);
   }
 
   // EDIT a single grocery item from a given user's list

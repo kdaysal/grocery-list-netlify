@@ -30,6 +30,15 @@ const App = () => {
     getallUserData();
   }, [])
 
+  //Fetch full list of all grocery items from the server and return the response as json
+  const fetchUsers = async () => {
+    const res = await fetch('https://damp-forest-55138.herokuapp.com/users');
+    const data = await res.json();
+    //console.log(data);
+    //console.log(`data from server: ${JSON.stringify(data)}`);
+    return data;
+  }
+
   // function to update state of 'userName' string and 'user' object for whichever user is now 'in session'
   function updateUserSession(userName, user) {
     setUserName(userName);
@@ -39,15 +48,6 @@ const App = () => {
 
     let currentGroceryItems = JSON.stringify(user.groceryListItems);
     console.log(`groceryItems for ${userName}: ${currentGroceryItems}`);
-  }
-
-  //Fetch full list of all grocery items from the server and return the response as json
-  const fetchUsers = async () => {
-    const res = await fetch('https://damp-forest-55138.herokuapp.com/users');
-    const data = await res.json();
-    //console.log(data);
-    //console.log(`data from server: ${JSON.stringify(data)}`);
-    return data;
   }
 
   const addItem = async (newItem, userId) => {
@@ -184,8 +184,7 @@ const App = () => {
     setVisibilityFilter(newVisibility);
   }
 
-  // EDIT a single grocery item
-
+  // Update STATE for a single grocery item
   const editGroceryItem = async (groceryItemId, groceryItemName, groceryItemAisle, groceryItemReminder) => {
     console.log(`editGroceryItem function called`)
     console.log(`editing Grocery Item ID: ${groceryItemId}`);
@@ -193,23 +192,6 @@ const App = () => {
     setGroceryItemName(groceryItemName);
     setGroceryItemAisle(groceryItemAisle);
     setGroceryItemReminder(groceryItemReminder);
-
-
-    // UPDATE DATABASE (pull this out into its own method later)
-    // const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
-    //   method: 'PATCH',
-    //   headers: {
-    //     'Content-type': 'application/json'
-    //   },
-    //   body: JSON.stringify(updatedUser)
-    // })
-
-    // const data = await res.json(); //returned from the server - this is ALL data for the given user
-
-    // console.log(`data returned from server: ${JSON.stringify(data)}`);
-
-    // let newUser = { ...updatedUser };
-    // setUser(newUser);
   }
 
   return (

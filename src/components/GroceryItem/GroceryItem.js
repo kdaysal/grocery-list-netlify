@@ -33,7 +33,7 @@ const GroceryItem = ({
           }
         />}
         <FaTimes style={{ color: 'red', cursor: 'pointer' }}
-          onClick={() => onDelete(groceryItem._id)}
+          onClick={() => { if (window.confirm('Are you sure you want to delete this item?')) onDelete(groceryItem._id) }}
         />
       </h3>
 

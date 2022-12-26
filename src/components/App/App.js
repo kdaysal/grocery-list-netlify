@@ -64,7 +64,7 @@ const App = () => {
     setUserName(userName);
     console.log(`userName set to: ${userName}`);
     setUser(user);
-    console.log(`user set to: ${JSON.stringify(user)}`);
+    //console.log(`user set to: ${JSON.stringify(user)}`);
 
     let currentGroceryItems = JSON.stringify(user.groceryListItems);
     console.log(`groceryItems for ${userName}: ${currentGroceryItems}`);

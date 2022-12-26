@@ -13,7 +13,7 @@ const Header = ({
   updateVisibilityFilter
 }) => {
 
-  //console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
+  console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
 
   let allUserNames = allUserData.map((x) => x.name);
   //console.log(`allUserNames from Header.js: ${allUserNames}`);
@@ -25,6 +25,7 @@ const Header = ({
         : ''}
       </h1>
       {/* If no current 'user' is set, present buttons with all possible user names for the person to choose from (i.e. to set a single 'user')*/}
+      <h3>Now viewing: {(visibilityFilter == 'all' ? 'All items' : (visibilityFilter == 'reminder-only' ? 'Items I need' : (visibilityFilter == 'no-reminder' ? 'Items I have' : null)))}</h3>
       {!userName && (
         allUserData.map((user, index) =>
           <Button
@@ -60,10 +61,10 @@ const Header = ({
       {/* Display 'visibility filter' buttons to let the user choose whether they want to see only 'reminder' items, only '!reminder' items, or 'all' items */}
       {((userName) && (visibilityFilter != 'all')) && (
         <Button
-          btnText={'See All'}
+          btnText={'All Items'}
           btnColor={'orange'}
           onClick={() => {
-            console.log(`See All clicked`)
+            console.log(`All Items clicked`)
             updateVisibilityFilter('all');
           }
           }

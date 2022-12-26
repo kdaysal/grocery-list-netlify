@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'//prop-types is totally optional for a small app like this - I'm adding it here for reference
 import Button from '../Button/Button'
+import { AiOutlineEdit } from 'react-icons/ai';
 
 const Header = ({
   title,
@@ -13,16 +14,25 @@ const Header = ({
   updateVisibilityFilter
 }) => {
 
-  console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
+  //console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
 
-  let allUserNames = allUserData.map((x) => x.name);
+  // let allUserNames = allUserData.map((x) => x.name);
   //console.log(`allUserNames from Header.js: ${allUserNames}`);
 
+  console.log(`userName: ${userName}`);
   return (
     <header>
       <h1 style={headingStyle}>{title} {userName ?
         '- ' + userName
-        : ''}
+        : ''} &nbsp; &nbsp;
+        {userName && <AiOutlineEdit
+          style={{ color: 'white' }}
+          onClick={() => {
+            {/* code to edit user name and update API goes here... */ }
+            console.log(`onClick for editUser button called`)
+          }
+          }
+        />}
       </h1>
       {/* If no current 'user' is set, present buttons with all possible user names for the person to choose from (i.e. to set a single 'user')*/}
       <h3>Now viewing: {(visibilityFilter == 'all' ? 'All items' : (visibilityFilter == 'reminder-only' ? 'Items I need' : (visibilityFilter == 'no-reminder' ? 'Items I have' : null)))}</h3>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../Button/Button";
 
 const AddItem = ({ onAdd, onSave, userId }) => {
   const [itemName, setItemName] = useState('');
@@ -18,7 +19,7 @@ const AddItem = ({ onAdd, onSave, userId }) => {
     setItemName('');
     setAisle('');
     setReminder(false);
-    onSave();//set showAddTask = !showAddTask to hide the AddItem form
+    onSave();//set showAddItem = !showAddItem to hide the AddItem form
   }
 
   return (
@@ -48,6 +49,13 @@ const AddItem = ({ onAdd, onSave, userId }) => {
         />
       </div>
       <input className='btn btn-block' type='submit' value='Save Task' />
+
+      <Button
+        btnText={'Cancel'}
+        btnColor={'orange'}
+        onClick={() => onSave()}
+      >
+      </Button>
     </form>
   )
 }

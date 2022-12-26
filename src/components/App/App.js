@@ -96,7 +96,9 @@ const App = () => {
   // EDIT a single grocery item from a given user's list
   const editItem = async (newItem, oldItemName) => {
     const userId = user._id;
-
+    let newItemName = newItem.itemName;
+    console.log(`newItemName: ${newItemName}`);
+    console.log(`oldItemName: ${oldItemName}`);
     //First run a check through all the existing grocery item names to ensure the NEW item name does not already exist.
 
     // create a variable 'indedOfDuplicate' to represent whether the newItem already exists in this user's list - in which case, the edit won't be allowed/saved
@@ -104,7 +106,7 @@ const App = () => {
     console.log(`indexOfDuplicate is: ${indexOfDuplicate}`);
 
     //if the newName already exists in this user's list, alert them and return without editing the item.
-    if (indexOfDuplicate !== -1) {
+    if ((indexOfDuplicate !== -1) && (newItemName !== oldItemName)) {
       window.alert('This item name is already in your list, please choose a different name');
       return;
     }

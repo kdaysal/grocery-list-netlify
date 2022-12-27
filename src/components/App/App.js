@@ -141,6 +141,22 @@ const App = () => {
     updateDatabase(userId);
   }
 
+  //Edit the user itself (i.e. just the user's name for now)
+  const editUser = async (newName, oldName) => {
+    const userId = user._id;
+
+    /* SET NEW NAME TO THE USER OBJECT HERE */
+
+
+    //update state of 'user' object
+    let newUser = { ...user };
+    setUser(newUser);
+
+    //call updateDatabase function to update 'user' in the db
+    updateDatabase(userId);
+  }
+
+
   // DELETE a single grocery item from a given user's list
   const onDelete = async (itemId) => {
     console.log(`ready to delete grocery item ID: ${itemId}`)
@@ -211,6 +227,7 @@ const App = () => {
         updateUserSession={updateUserSession}
         visibilityFilter={visibilityFilter}
         updateVisibilityFilter={updateVisibilityFilter}
+        editUser={editUser}
       />
       {showAddItem && <AddItem
         onAdd={addItem}

@@ -11,7 +11,8 @@ const Header = ({
   allUserData,
   updateUserSession,
   visibilityFilter,
-  updateVisibilityFilter
+  updateVisibilityFilter,
+  editUser
 }) => {
 
   //console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);

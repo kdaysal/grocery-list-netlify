@@ -12,7 +12,8 @@ const Header = ({
   updateUserSession,
   visibilityFilter,
   updateVisibilityFilter,
-  editUser
+  onEdit,
+  onEditShow //flips the state of showEditUser to its opposite
 }) => {
 
   //console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
@@ -29,10 +30,9 @@ const Header = ({
         {userName && <AiOutlineEdit
           style={{ color: 'white' }}
           onClick={() => {
-            {/* code to edit user name and update API goes here... */ }
-            console.log(`onClick for editUser button called`)
-          }
-          }
+            onEdit('my new name');
+            onEditShow();
+          }}
         />}
       </h1>
       {/* If no current 'user' is set, present buttons with all possible user names for the person to choose from (i.e. to set a single 'user')*/}

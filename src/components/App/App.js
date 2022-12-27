@@ -4,10 +4,12 @@ import Header from '../Header/Header';
 import AddItem from '../AddItem/AddItem';
 import GroceryItems from '../GroceryItems/GroceryItems';
 import EditItem from '../EditItem/EditItem';
+import EditUser from '../EditUser/EditUser';
 
 const App = () => {
   const [showAddItem, setShowAddItem] = useState(false);
   const [showEditItem, setShowEditItem] = useState(false);
+  const [showEditUser, setShowEditUser] = useState(false);
   const [allUserData, setallUserData] = useState([]); // object to hold the entirety of all data from my API
   const [allUserNames, setAllUserNames] = useState([]); // an array to hold all unique user names
   const [userName, setUserName] = useState(''); // string to hold the current user name that is 'in session'
@@ -143,6 +145,7 @@ const App = () => {
 
   //Edit the user itself (i.e. just the user's name for now)
   const editUser = async (newName, oldName) => {
+    console.log(`editUser function in App.js successfully called`);
     const userId = user._id;
 
     /* SET NEW NAME TO THE USER OBJECT HERE */
@@ -227,7 +230,8 @@ const App = () => {
         updateUserSession={updateUserSession}
         visibilityFilter={visibilityFilter}
         updateVisibilityFilter={updateVisibilityFilter}
-        editUser={editUser}
+        onEdit={editUser}
+        onEditShow={() => setShowEditUser(!showEditUser)}
       />
       {showAddItem && <AddItem
         onAdd={addItem}
@@ -244,6 +248,12 @@ const App = () => {
         editItem={editItem}
         onSave={() => setShowEditItem(!showEditItem)}
         showEditItem={showEditItem}
+      />}
+
+      {showEditUser && <EditUser
+        user={user}
+        onSave={() => setShowEditUser(!showEditUser)}
+        showEditUser={showEditUser}
       />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}

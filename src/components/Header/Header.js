@@ -35,10 +35,6 @@ const Header = ({
         />}
       </h1>
       {/* If no current 'user' is set, present buttons with all possible user names for the person to choose from (i.e. to set a single 'user')*/}
-      {userName && (
-        <h3>Now viewing: {(visibilityFilter == 'all' ? 'All items' : (visibilityFilter == 'reminder-only' ? 'Items I need' : (visibilityFilter == 'no-reminder' ? 'Items I have' : null)))}</h3>
-      )
-      }
       {!userName && (
         allUserData.map((user, index) =>
           <Button
@@ -70,11 +66,14 @@ const Header = ({
         />
       )
       }
-
+      {userName && (
+        <h3>Now viewing: {(visibilityFilter == 'all' ? 'All items' : (visibilityFilter == 'reminder-only' ? 'Items I need' : (visibilityFilter == 'no-reminder' ? 'Items I have' : null)))}</h3>
+      )
+      }
       {/* Display 'visibility filter' buttons to let the user choose whether they want to see only 'reminder' items, only '!reminder' items, or 'all' items */}
       {((userName) && (visibilityFilter != 'all')) && (
         <Button
-          btnText={'All Items'}
+          btnText={'Show All Items'}
           btnColor={'orange'}
           onClick={() => {
             console.log(`All Items clicked`)
@@ -84,11 +83,10 @@ const Header = ({
         />
       )
       }
-
       {/* Only see 'Items I need' (reminder-only) */}
       {((userName) && (visibilityFilter != 'reminder-only')) && (
         <Button
-          btnText={'Items I need'}
+          btnText={'Show Items I need'}
           btnColor={'orange'}
           onClick={() => {
             console.log(`Items I need clicked`)
@@ -102,7 +100,7 @@ const Header = ({
       {/* Only see 'Items I have' (no-reminder) */}
       {((userName) && (visibilityFilter != 'no-reminder')) && (
         <Button
-          btnText={'Items I have'}
+          btnText={'Show Items I have'}
           btnColor={'orange'}
           onClick={() => {
             console.log(`Items I have clicked`)

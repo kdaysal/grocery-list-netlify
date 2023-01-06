@@ -30,7 +30,6 @@ const Header = ({
         {userName && <AiOutlineEdit
           style={{ color: 'white' }}
           onClick={() => {
-            onEdit('my new name');
             onEditShow();
           }}
         />}

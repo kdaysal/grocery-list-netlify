@@ -1,10 +1,10 @@
 //import React from 'react'; //only needed for class components; not used here
 import { useState, useEffect } from 'react'
-import Header from '../Header/Header';
-import AddItem from '../AddItem/AddItem';
-import GroceryItems from '../GroceryItems/GroceryItems';
-import EditItem from '../EditItem/EditItem';
-import EditUser from '../EditUser/EditUser';
+import Header from './components/Header/Header';
+import AddItem from './components/AddItem/AddItem';
+import GroceryItems from './components/GroceryItems/GroceryItems';
+import EditItem from './components/EditItem/EditItem';
+import EditUser from './components/EditUser/EditUser';
 
 const App = () => {
   const [showAddItem, setShowAddItem] = useState(false);

@@ -21,15 +21,22 @@ const EditUser = ({
 
   const onSubmit = (e) => {
     e.preventDefault();//prevent the form from submitting to a new page
+    if (oldUserName.toLowerCase() != newUserName.toLowerCase()) {
 
-    // get newUserName from the 'e' here that was submitted in the form
-    console.log(`now passing updated name: ${newUserName} to editUser function in App.js`)
-    onEdit(newUserName);
 
-    console.log(`EditUser form was submitted`)
+      // get newUserName from the 'e' here that was submitted in the form
+      console.log(`now passing updated name: ${newUserName} to editUser function in App.js`)
+      onEdit(newUserName);
 
-    setOldUserName('');
-    onSave();//set showEditUser = !showEditUser (in App.js) to hide the EditUser form
+      console.log(`EditUser form was submitted`)
+
+      setOldUserName('');
+      onSave();//set showEditUser = !showEditUser (in App.js) to hide the EditUser form
+    }
+
+    else {
+      alert('Name is unchanged - please modify or cancel this form');
+    }
   }
 
   return (
@@ -48,7 +55,7 @@ const EditUser = ({
         btnColor={'orange'}
         onClick={() => {
           onSave();
-          onEdit('my new name');
+          onEdit(user.name);
         }
         }
       >

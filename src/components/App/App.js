@@ -155,14 +155,19 @@ const App = () => {
 
     console.log(`ZZZZ CURRENT user object is: ${JSON.stringify(user)}`);
 
-    //update state of 'user' object
-    let newUser = { ...user, "name": newName };
+    //update user object's name to the new name (note this doesn't actually modify the STATE of 'user' yet)
+    user.name = newName;
+
+    //now modify the state of 'user' object by creating a new object and setting it to a spread of the values of 'user'
+    let newUser = { ...user };
+    console.log(`newUser is now: ${JSON.stringify(newUser)}`);
     setUser(newUser);
 
     console.log(`newly set user object is: ${JSON.stringify(user)}`);
 
     //call updateDatabase function to update 'user' in the db
-    //updateDatabase(userId);
+    updateDatabase(userId);
+    setUserName(user.name);
   }
 
 

@@ -24,7 +24,7 @@ const EditUser = ({
 
     // get newUserName from the 'e' here that was submitted in the form
     console.log(`now passing updated name: ${newUserName} to editUser function in App.js`)
-    onEdit(oldUserName, newUserName);
+    onEdit(newUserName);
 
     console.log(`EditUser form was submitted`)
 
@@ -46,7 +46,11 @@ const EditUser = ({
       <Button
         btnText={'Cancel'}
         btnColor={'orange'}
-        onClick={() => onSave()}
+        onClick={() => {
+          onSave();
+          onEdit('my new name');
+        }
+        }
       >
       </Button>
     </form>

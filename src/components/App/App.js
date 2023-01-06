@@ -144,19 +144,25 @@ const App = () => {
   }
 
   //Edit the user itself (i.e. just the user's name for now)
-  const editUser = async (newName, oldName) => {
+  const editUser = async (newName) => {
     console.log(`editUser function in App.js successfully called`);
     const userId = user._id;
+    let oldName = user.name;
 
     /* SET NEW NAME TO THE USER OBJECT HERE */
+    console.log(`oldName: ${oldName}`);
+    console.log(`newName passed to editUser: ${newName}`);
 
+    console.log(`ZZZZ CURRENT user object is: ${JSON.stringify(user)}`);
 
     //update state of 'user' object
-    let newUser = { ...user };
+    let newUser = { ...user, "name": newName };
     setUser(newUser);
 
+    console.log(`newly set user object is: ${JSON.stringify(user)}`);
+
     //call updateDatabase function to update 'user' in the db
-    updateDatabase(userId);
+    //updateDatabase(userId);
   }
 
 
@@ -254,6 +260,7 @@ const App = () => {
         user={user}
         onSave={() => setShowEditUser(!showEditUser)}
         showEditUser={showEditUser}
+        onEdit={editUser}
       />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}

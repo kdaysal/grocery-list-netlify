@@ -41,7 +41,7 @@ const AddItem = ({ onAdd, onSave, userId }) => {
         />
       </div>
       <div className='form-control form-control-check'>
-        <label>Set Reminder</label>
+        <label>Item I need</label>
         <input type='checkbox'
           value={reminder}
           onChange={(e) => setReminder(e.currentTarget.checked)}

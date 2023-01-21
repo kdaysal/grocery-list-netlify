@@ -20,10 +20,15 @@ const GroceryItems = ({
         item.reminder === false : true
   })
 
+  // Sort the filteredList alphabetically by item name
+  let sortedList = filteredList.sort((a, b) => {
+    return (a.itemName.toLowerCase() > b.itemName.toLowerCase()) ? 1 : -1;
+  })
+
   return (
     //loop thru each element of the GroceryItems array to output a list of all the individual GroceryItems
     <>
-      {filteredList.map((groceryItem) => (
+      {sortedList.map((groceryItem) => (
         <GroceryItem
           key={groceryItem.itemName} // I was originally using groceryItem._id here, but I'm switching to groceryItem.itemName instead because the ._id won't be created until after the item is added to my db.
           groceryItem={groceryItem}

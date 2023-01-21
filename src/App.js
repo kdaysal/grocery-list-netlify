@@ -68,8 +68,15 @@ const App = () => {
     setUser(user);
     //console.log(`user set to: ${JSON.stringify(user)}`);
 
-    let currentGroceryItems = JSON.stringify(user.groceryListItems);
-    console.log(`groceryItems for ${userName}: ${currentGroceryItems}`);
+    //reset state of AddItem, EditItem, and EditUser to 'false' - this hides these edit forms in case they were open at the time when the Change User button was clicked
+    setShowAddItem(false);
+    setShowEditItem(false);
+    setShowEditUser(false);
+
+    /* Below block is for debugging only */
+    // let currentGroceryItems = JSON.stringify(user.groceryListItems);
+    // console.log(`groceryItems for ${userName}: ${currentGroceryItems}`);
+    /* Above block is for debugging only */
   }
 
   const addItem = async (newItem, userId) => {

@@ -230,6 +230,7 @@ const App = () => {
 
   // Update STATE for a single grocery item
   const editGroceryItem = async (groceryItemId, groceryItemName, groceryItemAisle, groceryItemReminder) => {
+    document.documentElement.scrollTop = 0;
     console.log(`editGroceryItem function called`)
     console.log(`editing Grocery Item ID: ${groceryItemId}`);
     setGroceryItemId(groceryItemId);

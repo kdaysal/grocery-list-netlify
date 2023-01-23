@@ -230,7 +230,9 @@ const App = () => {
 
   // Update STATE for a single grocery item
   const editGroceryItem = async (groceryItemId, groceryItemName, groceryItemAisle, groceryItemReminder) => {
-    document.documentElement.scrollTop = 0;
+    //auto-scroll to the top of the page so the EditItem form is visible / obvious to the user
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     console.log(`editGroceryItem function called`)
     console.log(`editing Grocery Item ID: ${groceryItemId}`);
     setGroceryItemId(groceryItemId);

@@ -211,13 +211,6 @@ const App = () => {
     })
     console.log(`updated user.groceryListItems = ${JSON.stringify(user.groceryListItems)}`);
 
-    /* 
-    //The below state update is already happening in 'updateDatabase()' so I don't think it's needed here - CAN DELETE after further testing
-    //update state of user
-    // let updatedUser = { ...user };
-    // setUser(updatedUser);
-    */
-
     let userId = user._id;
     //call updateDatabase function to update 'user' in the db
     updateDatabase(userId);

@@ -5,11 +5,13 @@ import AddItem from './components/AddItem/AddItem';
 import GroceryItems from './components/GroceryItems/GroceryItems';
 import EditItem from './components/EditItem/EditItem';
 import EditUser from './components/EditUser/EditUser';
+import AddUser from './components/AddUser/AddUser';
 
 const App = () => {
   const [showAddItem, setShowAddItem] = useState(false);
   const [showEditItem, setShowEditItem] = useState(false);
   const [showEditUser, setShowEditUser] = useState(false);
+  const [showAddUser, setShowAddUser] = useState(false);
   const [allUserData, setallUserData] = useState([]); // object to hold the entirety of all data from my API
   const [allUserNames, setAllUserNames] = useState([]); // an array to hold all unique user names
   const [userName, setUserName] = useState(''); // string to hold the current user name that is 'in session'
@@ -72,6 +74,7 @@ const App = () => {
     setShowAddItem(false);
     setShowEditItem(false);
     setShowEditUser(false);
+    setShowAddUser(false);
 
     /* Below block is for debugging only */
     // let currentGroceryItems = JSON.stringify(user.groceryListItems);
@@ -177,6 +180,33 @@ const App = () => {
     setUserName(user.name);
   }
 
+  // ADD NEW USER
+  //Add a brand new user to the db (only requires the new user's name)
+  const addUser = async (newName) => {
+    console.log(`addUser function in App.js successfully called`);
+
+
+    //first need to check against all current userNames to ensure the new name is unique...
+
+    console.log(`newName passed to addUser: ${newName}`);
+
+    //now figure out how to add the new user to the db here...then continue with the below (of setting the new user)
+
+    //update user object's name to the new name (note this doesn't actually modify the STATE of 'user' yet)
+    //user.name = newName;
+
+    //now modify the state of 'user' object by creating a new object and setting it to a spread of the values of 'user'
+
+    //let newUser = { ...user };
+    //console.log(`newUser is now: ${JSON.stringify(newUser)}`);
+    //setUser(newUser);
+
+    //console.log(`newly set user object is: ${JSON.stringify(user)}`);
+
+    //setUserName(user.name);
+  }
+  // END ADD NEW USER
+
 
   // DELETE a single grocery item from a given user's list
   const onDelete = async (itemId) => {
@@ -246,6 +276,7 @@ const App = () => {
         updateVisibilityFilter={updateVisibilityFilter}
         onEdit={editUser}
         onEditShow={() => setShowEditUser(!showEditUser)}
+        onAddShow={() => setShowAddUser(!showAddUser)}
       />
       {showAddItem && <AddItem
         onAdd={addItem}
@@ -269,6 +300,13 @@ const App = () => {
         onSave={() => setShowEditUser(!showEditUser)}
         showEditUser={showEditUser}
         onEdit={editUser}
+      />}
+
+      {showAddUser && <AddUser
+        user={user}
+        onSave={() => setShowAddUser(!showAddUser)}
+        showAddUser={showAddUser}
+        onAddUser={addUser}
       />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}

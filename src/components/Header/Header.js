@@ -14,7 +14,8 @@ const Header = ({
   visibilityFilter,
   updateVisibilityFilter,
   onEdit,
-  onEditShow //flips the state of showEditUser to its opposite
+  onEditShow, //flips the state of showEditUser to its opposite
+  onAddShow //flips the state of showAddUser to its opposite
 }) => {
 
   //console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
@@ -43,6 +44,9 @@ const Header = ({
           <Button
             btnColor='green'
             btnText='Add New User'
+            onClick={() => {
+              onAddShow();
+            }}
           >
           </Button>
         </div>

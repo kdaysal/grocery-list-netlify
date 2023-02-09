@@ -37,6 +37,18 @@ const Header = ({
             }}
           />}
       </h1>
+      {/* If no user is set, show 'Add New User' button*/}
+      {!userName && (
+        <div className='user-button-wrapper'>
+          <Button
+            btnColor='green'
+            btnText='Add New User'
+          >
+          </Button>
+        </div>
+      )
+      }
+
       {/* If no current 'user' is set, present buttons with all possible user names for the person to choose from (i.e. to set a single 'user')*/}
       {!userName && (
         allUserData.map((user, index) =>
@@ -65,7 +77,7 @@ const Header = ({
         )
         }
 
-        {/* Only show the Add button if no current 'user' is set */}
+        {/* Only show the Add Task button if no current 'user' is set */}
         {userName && (
           <Button
             btnText={showAddTask ? 'Close' : 'Add Item'}

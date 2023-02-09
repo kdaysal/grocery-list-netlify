@@ -71,7 +71,7 @@ const Header = ({
       }
 
       {/* If (user) then show a 'Change User button' */}
-      <div class="header-button">
+      <div className="header-button">
         {userName && (
           <Button
             btnText={'Change User'}
@@ -96,7 +96,7 @@ const Header = ({
       )
       }
       {/* Display 'visibility filter' buttons to let the user choose whether they want to see only 'reminder' items, only '!reminder' items, or 'all' items */}
-      <div class="show-items-button">
+      <div className="show-items-button">
         {((userName) && (visibilityFilter != 'all')) && (
           <Button
             btnText={'Show All Items'}

@@ -11,8 +11,9 @@ const AddUser = ({
   onSave, //to flip state of showAddUser from true to false
   showAddUser,
   onAddUser,
-  onAddShow
+  onAddShow,
   //need to import array of all the current userNames here
+  allUserNames //array holding a list of all the current userNames from the db - this will be used for validation before allowing any NEW usernames to be created/added
 }) => {
 
   const [newUserName, setNewUserName] = useState('');
@@ -21,16 +22,29 @@ const AddUser = ({
     e.preventDefault();//prevent the form from submitting to a new page
 
     //validation to check that the new userName to be created does not already exist - TBD...
+    console.log(`newUserName set to: ${newUserName}`);
+    console.log(`allUserNames is currently: ${allUserNames}`);
 
+    let isTaken = false;//boolean to represent whether the new userName already exists in the database
+    allUserNames.forEach(name => {
+      //console.log(`now comparing name: ${name.toLowerCase()} to newUserName: ${newUserName.toLowerCase()}`);
+      if (name.toLowerCase() == newUserName.toLowerCase()) {
+        isTaken = true;
+      }
+    });
 
+    if (isTaken) {
+      alert('That name is already taken, please try again');
+    }
 
-    // get newUserName from the 'e' here that was submitted in the form
-    console.log(`now passing updated name: ${newUserName} to addUser function in App.js`)
-    onAddUser(newUserName);
+    else {
+      console.log(`now passing updated name: ${newUserName} to addUser function in App.js`)
+      onAddUser(newUserName);
 
-    console.log(`AddUser form was submitted`)
+      console.log(`AddUser form was submitted`)
 
-    onSave();//set showAddUser = !showAddUser (in App.js) to hide the EditUser form
+      onSave();//set showAddUser = !showAddUser (in App.js) to hide the EditUser form
+    }
   }
 
 

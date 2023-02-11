@@ -26,12 +26,20 @@ const App = () => {
 
   //On initial page load, retrieve all users from my api server and update state of 'allUserData' accordingly
   useEffect(() => {
-    const getallUserData = async () => {
-      //console.log(`getallUserData called`);
+    const getAllUserData = async () => {
       const allUserData = await fetchUsers();
       setallUserData(allUserData);
+      //console.log(`allUserData from getAllUserData is: ${JSON.stringify(allUserData)}`);
+
+      //create a blank array to hold just the usernames retrieved from the db:
+      const currentUserNames = [];
+      allUserData.map((x) => {
+        currentUserNames.push(x.name)
+      });
+      console.log(`currentUserNames: ${currentUserNames}`);
+      setAllUserNames(currentUserNames);
     }
-    getallUserData();
+    getAllUserData();
   }, [])
 
   //Fetch full list of all grocery items from the server and return the response as json
@@ -307,6 +315,7 @@ const App = () => {
         onSave={() => setShowAddUser(!showAddUser)}
         showAddUser={showAddUser}
         onAddUser={addUser}
+        allUserNames={allUserNames}
       />}
 
       {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}

@@ -193,12 +193,21 @@ const App = () => {
   const addUser = async (newName) => {
     console.log(`addUser function in App.js successfully called`);
 
-
-    //first need to check against all current userNames to ensure the new name is unique...
-
-    console.log(`newName passed to addUser: ${newName}`);
+    console.log(`newName actually passed to addUser: ${newName}`);
 
     //now figure out how to add the new user to the db here...then continue with the below (of setting the new user)
+    const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: {
+        "name": newName
+      }
+    })
+
+    const data = await res.json();
+    console.log(`data returned from server: ${JSON.stringify(data)}`);
 
     //update user object's name to the new name (note this doesn't actually modify the STATE of 'user' yet)
     //user.name = newName;

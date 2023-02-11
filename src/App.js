@@ -41,7 +41,7 @@ const App = () => {
       setAllUserNames(currentUserNames);
     }
     getAllUserData();
-  }, [])
+  }, [user])
 
   //Fetch full list of all grocery items from the server and return the response as json
   const fetchUsers = async () => {

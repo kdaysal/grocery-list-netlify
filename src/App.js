@@ -55,6 +55,7 @@ const App = () => {
   //takes in a userId and updates the 'user' object in the database to match whatever the current state of 'user' in App.js is. This works because this function will only be called AFTER state of 'user' has been updated in App.js.
   const updateDatabase = async (userId) => {
     console.log(`updateDatabase function called in App.js`);
+    console.log(`JSON.stringify(user): ${JSON.stringify(user)}`);
     const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
       method: 'PATCH',
       headers: {
@@ -193,8 +194,19 @@ const App = () => {
   //Add a brand new user to the db (only requires the new user's name)
   const addUser = async (newName) => {
     console.log(`addUser function in App.js successfully called`);
-
     console.log(`newName actually passed to addUser: ${newName}`);
+
+    //EXPERIMENTAL
+    //update user object's name to the new name (note this doesn't actually modify the STATE of 'user' yet)
+    user.name = newName;
+
+    //now modify the state of 'user' object by creating a new object and setting it to a spread of the values of 'user'
+    let newUser = { ...user };
+    console.log(`newUser is now: ${JSON.stringify(newUser)}`);
+    setUser(newUser);
+
+    console.log(`newly set user object is: ${JSON.stringify(user)}`);
+    //EXPERIMENTAL-end
 
     //now figure out how to add the new user to the db here...then continue with the below (of setting the new user)
     const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/`, {
@@ -202,26 +214,20 @@ const App = () => {
       headers: {
         'Content-type': 'application/json'
       },
-      body: {
-        "name": newName
-      }
+      body: JSON.stringify(newUser)
     })
 
     const data = await res.json();
     console.log(`data returned from server: ${JSON.stringify(data)}`);
 
     //update user object's name to the new name (note this doesn't actually modify the STATE of 'user' yet)
-    //user.name = newName;
+    user.name = newName;
 
     //now modify the state of 'user' object by creating a new object and setting it to a spread of the values of 'user'
+    setUser(newUser);
+    console.log(`newly set user object is: ${JSON.stringify(user)}`);
 
-    //let newUser = { ...user };
-    //console.log(`newUser is now: ${JSON.stringify(newUser)}`);
-    //setUser(newUser);
-
-    //console.log(`newly set user object is: ${JSON.stringify(user)}`);
-
-    //setUserName(user.name);
+    setUserName(user.name);
   }
   // END ADD NEW USER
 

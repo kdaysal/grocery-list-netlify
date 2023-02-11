@@ -95,7 +95,11 @@ const App = () => {
   const addItem = async (newItem, userId) => {
     //First run a check through all the existing grocery item names to ensure the NEW item name does not already exist.
 
-    // create a variable 'indedOfDuplicate' to represent whether the newItem already exists in this user's list - in which case, the edit won't be allowed/saved
+    // create a variable 'indexOfDuplicate' to represent whether the newItem already exists in this user's list - in which case, the edit won't be allowed/saved
+
+    //to handle case where a brand new user is receiving thier first grocery item to add, I'm creating a blank array to represend their grocery items
+    if (!user.groceryListItems) user.groceryListItems = [];
+
     const indexOfDuplicate = user.groceryListItems.findIndex(item => item.itemName.toLowerCase() == newItem.itemName.toLowerCase());
     console.log(`indexOfDuplicate is: ${indexOfDuplicate}`);
 

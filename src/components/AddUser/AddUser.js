@@ -47,18 +47,19 @@ const AddUser = ({
     }
   }
 
-
   return (
     <form className='add-user-form' onSubmit={onSubmit}>
       <div className='form-control'>
         <label>Add User Name</label>
-        <input type='text'
+        <input autoFocus
+          id="new-user-field"
+          type='text'
           value={newUserName}
           onChange={(e) => setNewUserName(e.target.value)}
           placeholder={"New User's Name"}
         />
       </div>
-      <input className='btn btn-block' type='submit' value='Save form' />
+      <input className='btn btn-block' type='submit' value='Save User' />
       <Button
         btnText={'Cancel'}
         btnColor={'orange'}

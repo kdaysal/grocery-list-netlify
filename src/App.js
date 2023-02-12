@@ -235,10 +235,25 @@ const App = () => {
   }
   // END ADD NEW USER
 
+  // BEGIN DELETE USER
   const deleteUser = async (userId) => {
     console.log(`userId passed to deleteUser function in App.js is: ${userId}`);
-  }
 
+    const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+
+    const data = await res.json();
+    console.log(`data returned from server: ${JSON.stringify(data)}`);
+
+    //now reset 'user' object to blank/null
+    setUser([]);
+    setUserName('');
+  }
+  // END DELETE USER
 
   // DELETE a single grocery item from a given user's list
   const onDelete = async (itemId) => {

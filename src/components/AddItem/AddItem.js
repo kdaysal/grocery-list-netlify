@@ -27,6 +27,7 @@ const AddItem = ({ onAdd, onSave, userId }) => {
       <div className='form-control'>
         <label>Item</label>
         <input type='text'
+          autoFocus
           value={itemName}
           onChange={(e) => setItemName(e.target.value)}
           placeholder='Add Item'
@@ -48,7 +49,7 @@ const AddItem = ({ onAdd, onSave, userId }) => {
           checked={reminder ? true : false} //could shorten this to: checked={reminder}
         />
       </div>
-      <input className='btn btn-block' type='submit' value='Save Task' />
+      <input className='btn btn-block' type='submit' value='Save Item' />
 
       <Button
         btnText={'Cancel'}

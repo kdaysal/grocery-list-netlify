@@ -197,22 +197,14 @@ const App = () => {
   // ADD NEW USER
   //Add a brand new user to the db (only requires the new user's name)
   const addUser = async (newName) => {
-    console.log(`addUser function in App.js successfully called`);
-    console.log(`newName actually passed to addUser: ${newName}`);
+    //console.log(`addUser function in App.js successfully called`);
+    //console.log(`newName actually passed to addUser: ${newName}`);
 
-    //EXPERIMENTAL
-    //update user object's name to the new name (note this doesn't actually modify the STATE of 'user' yet)
-    user.name = newName;
+    let newUser = { ...user, "name": newName };
+    //console.log(`newUser is now: ${JSON.stringify(newUser)}`);
 
-    //now modify the state of 'user' object by creating a new object and setting it to a spread of the values of 'user'
-    let newUser = { ...user };
-    console.log(`newUser is now: ${JSON.stringify(newUser)}`);
-    setUser(newUser);
 
-    console.log(`newly set user object is: ${JSON.stringify(user)}`);
-    //EXPERIMENTAL-end
-
-    //now figure out how to add the new user to the db here...then continue with the below (of setting the new user)
+    //now add the newUser object to the db here...then continue with the below (of setting the new user)
     const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/`, {
       method: 'POST',
       headers: {
@@ -221,17 +213,13 @@ const App = () => {
       body: JSON.stringify(newUser)
     })
 
-    const data = await res.json();
-    console.log(`data returned from server: ${JSON.stringify(data)}`);
-
-    //update user object's name to the new name (note this doesn't actually modify the STATE of 'user' yet)
-    user.name = newName;
+    const updatedUser = await res.json();
+    //console.log(`data returned from server: ${JSON.stringify(updatedUser)}`);
 
     //now modify the state of 'user' object by creating a new object and setting it to a spread of the values of 'user'
-    setUser(newUser);
-    console.log(`newly set user object is: ${JSON.stringify(user)}`);
-
-    setUserName(user.name);
+    setUser(updatedUser);
+    //console.log(`newly set user object is: ${JSON.stringify(user)}`);
+    setUserName(updatedUser.name);
   }
   // END ADD NEW USER
 

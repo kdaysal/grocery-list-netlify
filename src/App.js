@@ -235,6 +235,10 @@ const App = () => {
   }
   // END ADD NEW USER
 
+  const deleteUser = async (userId) => {
+    console.log(`userId passed to deleteUser function in App.js is: ${userId}`);
+  }
+
 
   // DELETE a single grocery item from a given user's list
   const onDelete = async (itemId) => {
@@ -328,6 +332,7 @@ const App = () => {
         onSave={() => setShowEditUser(!showEditUser)}
         showEditUser={showEditUser}
         onEdit={editUser}
+        onDelete={deleteUser}
       />}
 
       {showAddUser && <AddUser

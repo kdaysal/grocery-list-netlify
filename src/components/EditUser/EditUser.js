@@ -5,6 +5,7 @@
 
 import { useState } from "react";
 import Button from "../Button/Button";
+import './EditUser.css';
 
 const EditUser = ({
   user,
@@ -54,27 +55,31 @@ const EditUser = ({
           />
         </div>
         <input className='btn btn-block' type='submit' value='Save form' />
-        <Button
-          btnText={'Cancel'}
-          btnColor={'orange'}
-          onClick={() => {
-            onSave();
-            onEdit(user.name);
-          }}
-        >
-        </Button>
+        <div className='action-btns'>
+          <Button
+            btnText={'Cancel'}
+            btnColor={'orange'}
+            onClick={() => {
+              onSave();
+              onEdit(user.name);
+            }}
+          >
+          </Button>
+          <Button
+            type="button"
+            btnText={'Delete User'}
+            btnColor={'red'}
+            onClick={() => {
+              if (window.confirm('Are you sure you want to delete this user? This action is irreversible!')) {
+                onDelete(user._id)
+                onSave();//This just flips showEditUser to its opposite
+              }
+            }}
+          >
+          </Button>
+        </div>
       </form>
-      <Button
-        btnText={'Delete User'}
-        btnColor={'red'}
-        onClick={() => {
-          if (window.confirm('Are you sure you want to delete this user? This action is irreversible!')) {
-            onDelete(user._id)
-            onSave();//This just flips showEditUser to its opposite
-          }
-        }}
-      >
-      </Button>
+
     </>
   )
 }

@@ -52,7 +52,7 @@ const Header = ({
       {/* If no current 'user' is set, present buttons with all possible user names for the person to choose from (i.e. to set a single 'user')*/}
       {!userName && (
         allUserData.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1).map((user, index) =>
-          <div className='user-button-wrapper'>
+          <div className='user-button-wrapper' key={index}>
             <Button
               className="user-button"
               key={index}

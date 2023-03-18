@@ -18,12 +18,8 @@ const Header = ({
   onAddShow //flips the state of showAddUser to its opposite
 }) => {
 
-  //console.log(`Header.js - visibilityFilter: ${visibilityFilter}`);
-
-  // let allUserNames = allUserData.map((x) => x.name);
-  //console.log(`allUserNames from Header.js: ${allUserNames}`);
-
-  console.log(`userName: ${userName}`);
+  //console.log(`allUserDate: ${JSON.stringify(allUserData)}`);
+  //console.log(`current userName: ${userName}`);
   return (
     <header>
       <h1 style={headingStyle}>{title} {userName ?
@@ -55,8 +51,8 @@ const Header = ({
 
       {/* If no current 'user' is set, present buttons with all possible user names for the person to choose from (i.e. to set a single 'user')*/}
       {!userName && (
-        allUserData.map((user, index) =>
-          <div className='user-button-wrapper'>
+        allUserData.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1).map((user, index) =>
+          <div className='user-button-wrapper' key={index}>
             <Button
               className="user-button"
               key={index}

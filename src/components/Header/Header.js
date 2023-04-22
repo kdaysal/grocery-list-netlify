@@ -18,8 +18,9 @@ const Header = ({
   onAddShow //flips the state of showAddUser to its opposite
 }) => {
 
-  //console.log(`allUserDate: ${JSON.stringify(allUserData)}`);
-  //console.log(`current userName: ${userName}`);
+  console.log(`user object from Header.js: ${JSON.stringify(user)}`);
+  console.log(`userName in Header.js is: ${userName}`);
+
   return (
     <header>
       <h1 style={headingStyle}>{title} {userName ?

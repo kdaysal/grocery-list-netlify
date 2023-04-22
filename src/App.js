@@ -1,14 +1,18 @@
 //TEST - this is an edit from my mac and committed/pushed to 'mac-wip-1' branch
 //import React from 'react'; //only needed for class components; not used here
+//https://damp-forest-55138.herokuapp.com/users ... quick visual ref for what the user objects look like
 import { useState, useEffect } from 'react'
+import PulseLoader from "react-spinners/PulseLoader";
 import Header from './components/Header/Header';
 import AddItem from './components/AddItem/AddItem';
 import GroceryItems from './components/GroceryItems/GroceryItems';
 import EditItem from './components/EditItem/EditItem';
 import EditUser from './components/EditUser/EditUser';
 import AddUser from './components/AddUser/AddUser';
+import './App.css';
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [showAddItem, setShowAddItem] = useState(false);
   const [showEditItem, setShowEditItem] = useState(false);
   const [showEditUser, setShowEditUser] = useState(false);
@@ -30,7 +34,6 @@ const App = () => {
     const getAllUserData = async () => {
       const allUserData = await fetchUsers();
       setallUserData(allUserData);
-      //console.log(`allUserData from getAllUserData is: ${JSON.stringify(allUserData)}`);
 
       //create a blank array to hold just the usernames retrieved from the db:
       const currentUserNames = [];
@@ -45,10 +48,10 @@ const App = () => {
 
   //Fetch full list of all grocery items from the server and return the response as json
   const fetchUsers = async () => {
+    setIsLoading(true);
     const res = await fetch('https://damp-forest-55138.herokuapp.com/users');
     const data = await res.json();
-    //console.log(data);
-    //console.log(`data from server: ${JSON.stringify(data)}`);
+    setIsLoading(false);
     return data;
   }
 
@@ -313,6 +316,19 @@ const App = () => {
         onEditShow={() => setShowEditUser(!showEditUser)}
         onAddShow={() => setShowAddUser(!showAddUser)}
       />
+
+
+      {isLoading && (
+        <div className="pulse-loader">
+          <PulseLoader
+            color='blue'
+            size='30px'
+            margin='17px'
+          />
+        </div>
+      )}
+
+
       {showAddItem && <AddItem
         onAdd={addItem}
         onSave={() => setShowAddItem(!showAddItem)}
@@ -346,18 +362,16 @@ const App = () => {
         allUserNames={allUserNames}
       />}
 
-      {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}
-        onDelete={onDelete}
-        onToggle={onToggle}
-        visibilityFilter={visibilityFilter}
-        editGroceryItem={editGroceryItem}
-        onEdit={() => setShowEditItem(!showEditItem)}
-        showEditItem={showEditItem}
-
-      />
-        : (
-          'No grocery items to show'
-        )}
+      {(user.groceryListItems != undefined) && (
+        <GroceryItems groceryListItems={user.groceryListItems}
+          onDelete={onDelete}
+          onToggle={onToggle}
+          visibilityFilter={visibilityFilter}
+          editGroceryItem={editGroceryItem}
+          onEdit={() => setShowEditItem(!showEditItem)}
+          showEditItem={showEditItem}
+        />
+      )}
     </div>
   );
 }

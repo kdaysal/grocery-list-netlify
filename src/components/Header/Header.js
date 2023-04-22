@@ -24,6 +24,7 @@ const Header = ({
   // console.log('user.groceryListItems == []: ', user.groceryListItems == [])
   // console.log('user.groceryListItems == undefined: ', user.groceryListItems == undefined);
   // console.log('user.groceryListItems.length > 0: ', user.groceryListItems?.length > 0);
+  console.log('user.groceryListItems?.length: ', user.groceryListItems?.length)
 
   return (
     <header>
@@ -98,7 +99,7 @@ const Header = ({
       }
       {/* Display 'visibility filter' buttons to let the user choose whether they want to see only 'reminder' items, only '!reminder' items, or 'all' items */}
       <div className="show-items-button">
-        {((userName) && (visibilityFilter != 'all')) && (
+        {((userName) && (visibilityFilter != 'all') && (user.groceryListItems?.length > 0)) && (
           <Button
             btnText={'Show All Items'}
             btnColor={'orange'}
@@ -111,7 +112,7 @@ const Header = ({
         )
         }
         {/* Only see 'Items I need' (reminder-only) */}
-        {((userName) && (visibilityFilter != 'reminder-only')) && (
+        {((userName) && (visibilityFilter != 'reminder-only') && (user.groceryListItems?.length > 0)) && (
           <Button
             btnText={'Show Items I need'}
             btnColor={'orange'}
@@ -125,7 +126,7 @@ const Header = ({
         }
 
         {/* Only see 'Items I have' (no-reminder) */}
-        {((userName) && (visibilityFilter != 'no-reminder')) && (
+        {((userName) && (visibilityFilter != 'no-reminder') && (user.groceryListItems?.length > 0)) && (
           <Button
             btnText={'Show Items I have'}
             btnColor={'orange'}

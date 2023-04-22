@@ -40,8 +40,8 @@ const App = () => {
       allUserData.map((x) => {
         currentUserNames.push(x.name)
       });
-      console.log(`currentUserNames: ${currentUserNames}`);
       setAllUserNames(currentUserNames);
+      console.log(`current user object: ${JSON.stringify(user)}`);
     }
     getAllUserData();
   }, [user])
@@ -306,6 +306,7 @@ const App = () => {
     <div className="container">
       <Header title='Grocery List'
         onAdd={() => setShowAddItem(!showAddItem)}
+        user={user}
         showAddItem={showAddItem}
         userName={userName}
         allUserData={allUserData}

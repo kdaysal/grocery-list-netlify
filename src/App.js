@@ -1,6 +1,8 @@
 //TEST - this is an edit from my mac and committed/pushed to 'mac-wip-1' branch
 //import React from 'react'; //only needed for class components; not used here
+//https://damp-forest-55138.herokuapp.com/users ... quick visual ref for what the user objects look like
 import { useState, useEffect } from 'react'
+import PulseLoader from "react-spinners/PulseLoader";
 import Header from './components/Header/Header';
 import AddItem from './components/AddItem/AddItem';
 import GroceryItems from './components/GroceryItems/GroceryItems';
@@ -9,6 +11,7 @@ import EditUser from './components/EditUser/EditUser';
 import AddUser from './components/AddUser/AddUser';
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [showAddItem, setShowAddItem] = useState(false);
   const [showEditItem, setShowEditItem] = useState(false);
   const [showEditUser, setShowEditUser] = useState(false);
@@ -41,6 +44,8 @@ const App = () => {
       setAllUserNames(currentUserNames);
     }
     getAllUserData();
+    //debugging below
+    console.log(`user: ${JSON.stringify(user)}`);
   }, [user])
 
   //Fetch full list of all grocery items from the server and return the response as json
@@ -313,6 +318,13 @@ const App = () => {
         onEditShow={() => setShowEditUser(!showEditUser)}
         onAddShow={() => setShowAddUser(!showAddUser)}
       />
+
+      {isLoading ? (
+        <PulseLoader />
+      ) : (
+        {/* rest of the content*/ }
+      )}
+
       {showAddItem && <AddItem
         onAdd={addItem}
         onSave={() => setShowAddItem(!showAddItem)}
@@ -346,18 +358,16 @@ const App = () => {
         allUserNames={allUserNames}
       />}
 
-      {user.groceryListItems != undefined ? <GroceryItems groceryListItems={user.groceryListItems}
-        onDelete={onDelete}
-        onToggle={onToggle}
-        visibilityFilter={visibilityFilter}
-        editGroceryItem={editGroceryItem}
-        onEdit={() => setShowEditItem(!showEditItem)}
-        showEditItem={showEditItem}
-
-      />
-        : (
-          'No grocery items to show'
-        )}
+      {(user.groceryListItems != undefined) && (
+        <GroceryItems groceryListItems={user.groceryListItems}
+          onDelete={onDelete}
+          onToggle={onToggle}
+          visibilityFilter={visibilityFilter}
+          editGroceryItem={editGroceryItem}
+          onEdit={() => setShowEditItem(!showEditItem)}
+          showEditItem={showEditItem}
+        />
+      )}
     </div>
   );
 }

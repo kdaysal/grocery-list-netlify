@@ -9,6 +9,7 @@ import GroceryItems from './components/GroceryItems/GroceryItems';
 import EditItem from './components/EditItem/EditItem';
 import EditUser from './components/EditUser/EditUser';
 import AddUser from './components/AddUser/AddUser';
+import './App.css';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -319,11 +320,17 @@ const App = () => {
         onAddShow={() => setShowAddUser(!showAddUser)}
       />
 
-      {isLoading ? (
-        <PulseLoader />
-      ) : (
-        {/* rest of the content*/ }
-      )}
+      <div className="pulse-loader">
+        {isLoading ? (
+          <PulseLoader
+            color='blue'
+            size='30px'
+            margin='17px'
+          />
+        ) : (
+          {/* rest of the content*/ }
+        )}
+      </div>
 
       {showAddItem && <AddItem
         onAdd={addItem}

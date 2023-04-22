@@ -34,7 +34,6 @@ const App = () => {
     const getAllUserData = async () => {
       const allUserData = await fetchUsers();
       setallUserData(allUserData);
-      //console.log(`allUserData from getAllUserData is: ${JSON.stringify(allUserData)}`);
 
       //create a blank array to hold just the usernames retrieved from the db:
       const currentUserNames = [];
@@ -45,16 +44,14 @@ const App = () => {
       setAllUserNames(currentUserNames);
     }
     getAllUserData();
-    //debugging below
-    console.log(`user: ${JSON.stringify(user)}`);
   }, [user])
 
   //Fetch full list of all grocery items from the server and return the response as json
   const fetchUsers = async () => {
+    setIsLoading(true);
     const res = await fetch('https://damp-forest-55138.herokuapp.com/users');
     const data = await res.json();
-    //console.log(data);
-    //console.log(`data from server: ${JSON.stringify(data)}`);
+    setIsLoading(false);
     return data;
   }
 
@@ -320,17 +317,17 @@ const App = () => {
         onAddShow={() => setShowAddUser(!showAddUser)}
       />
 
-      <div className="pulse-loader">
-        {isLoading ? (
+
+      {isLoading && (
+        <div className="pulse-loader">
           <PulseLoader
             color='blue'
             size='30px'
             margin='17px'
           />
-        ) : (
-          {/* rest of the content*/ }
-        )}
-      </div>
+        </div>
+      )}
+
 
       {showAddItem && <AddItem
         onAdd={addItem}

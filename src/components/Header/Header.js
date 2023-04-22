@@ -18,8 +18,12 @@ const Header = ({
   onAddShow //flips the state of showAddUser to its opposite
 }) => {
 
-  console.log(`user object from Header.js: ${JSON.stringify(user)}`);
-  console.log(`userName in Header.js is: ${userName}`);
+  // console.log(`user object from Header.js: ${JSON.stringify(user)}`);
+  // console.log(`userName in Header.js is: ${userName}`);
+  // console.log('user.groceryListItems: ', user.groceryListItems);
+  // console.log('user.groceryListItems == []: ', user.groceryListItems == [])
+  // console.log('user.groceryListItems == undefined: ', user.groceryListItems == undefined);
+  // console.log('user.groceryListItems.length > 0: ', user.groceryListItems?.length > 0);
 
   return (
     <header>
@@ -88,7 +92,7 @@ const Header = ({
         )
         }
       </div>
-      {userName && (
+      {userName && (user.groceryListItems?.length > 0) && (
         <h3 id='now-viewing'>Now viewing: {(visibilityFilter == 'all' ? 'All items' : (visibilityFilter == 'reminder-only' ? 'Items I need' : (visibilityFilter == 'no-reminder' ? 'Items I have' : null)))}</h3>
       )
       }

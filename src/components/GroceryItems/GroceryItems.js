@@ -13,7 +13,7 @@ const GroceryItems = ({
 }) => {
 
   // Only display items based on state of 'visibility filter'
-  let filteredList = groceryListItems.filter((item) => {
+  let filteredList = groceryListItems?.filter((item) => {
     return (visibilityFilter === 'reminder-only') ?
       item.reminder === true :
       (visibilityFilter === 'no-reminder') ?
@@ -21,8 +21,8 @@ const GroceryItems = ({
   })
 
   // Sort the filteredList alphabetically by item name
-  let sortedList = filteredList.sort((a, b) => {
-    return (a.itemName.toLowerCase() > b.itemName.toLowerCase()) ? 1 : -1;
+  let sortedList = filteredList?.sort((a, b) => {
+    return (a.itemName?.toLowerCase() > b.itemName?.toLowerCase()) ? 1 : -1;
   })
 
   return (
@@ -32,7 +32,7 @@ const GroceryItems = ({
         <GroceryItem
           key={groceryItem.itemName} // I was originally using groceryItem._id here, but I'm switching to groceryItem.itemName instead because the ._id won't be created until after the item is added to my db.
           groceryItem={groceryItem}
-          onDelete={() => onDelete(groceryItem._id)}
+          onDelete={onDelete}
           onToggle={onToggle}
           editGroceryItem={editGroceryItem}
           onEdit={onEdit}

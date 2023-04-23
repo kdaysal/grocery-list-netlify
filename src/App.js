@@ -20,7 +20,7 @@ const App = () => {
   const [allUserData, setallUserData] = useState([]); // object to hold the entirety of all data from my API
   const [allUserNames, setAllUserNames] = useState([]); // an array to hold all unique user names
   const [userName, setUserName] = useState(''); // string to hold the current user name that is 'in session'
-  const [user, setUser] = useState([]); // array to hold all data for only the current user who is 'in session'
+  const [user, setUser] = useState({}); // array to hold all data for only the current user who is 'in session'
   const [visibilityFilter, setVisibilityFilter] = useState('all');
 
   // Below states are used for editing a single grocery item for the in-session user
@@ -56,23 +56,27 @@ const App = () => {
   }
 
   //takes in a userId and updates the 'user' object in the database to match whatever the current state of 'user' in App.js is. This works because this function will only be called AFTER state of 'user' has been updated in App.js.
-  const updateDatabase = async (userId) => {
+  const updateDatabase = async (userId, updatedUser = null) => {
     console.log(`updateDatabase function called in App.js`);
-    console.log(`JSON.stringify(user): ${JSON.stringify(user)}`);
+    console.log(`JSON.stringify(user) in updateDatabase(): ${JSON.stringify(user)}`);
+    console.log(`JSON.stringify(newUserObject) in updateDatabase(): ${JSON.stringify(updatedUser)}`)
+
+    let updatedBody = updatedUser == null ? user : updatedUser;
+    console.log(`JSON.stringify(updatedBody): ${JSON.stringify(updatedBody)}`);
     const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
       method: 'PATCH',
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(updatedBody)
     })
 
     const data = await res.json(); //returned from the server - this is ALL data for the given user
 
-    console.log(`data returned from server: ${JSON.stringify(data)}`);
+    console.log(`data returned from server after updateDatabase(): ${JSON.stringify(data)}`);
 
     // purpose of creating 'newUser' below and setting state of 'user' = 'newUser' is to force the GroceryList component to re-render. Had I merely done `setUser(user)` instead, this would only point setUser to the same OBJECT REFERENCE of 'user' (despite the fact that I updated one of the 'user' object's properties). This way I'm actually updating the state of 'user' to point to a different object (newUser) and thus the component re-renders. This fixed the issue of the just-deleted grocery item still remaining on the UI after hitting the delete button.
-    let newUser = { ...user };
+    let newUser = updatedUser == null ? { ...user } : {...updatedUser};
     setUser(newUser);
   }
 
@@ -96,14 +100,15 @@ const App = () => {
   }
 
   const addItem = async (newItem, userId) => {
+    console.log(`received newItem: ${JSON.stringify(newItem)} in addItem() function`);
     //First run a check through all the existing grocery item names to ensure the NEW item name does not already exist.
 
     // create a variable 'indexOfDuplicate' to represent whether the newItem already exists in this user's list - in which case, the edit won't be allowed/saved
 
     //to handle case where a brand new user is receiving thier first grocery item to add, I'm creating a blank array to represend their grocery items
-    if (!user.groceryListItems) user.groceryListItems = [];
+    //if (!user.groceryListItems) user.groceryListItems = [];
 
-    const indexOfDuplicate = user.groceryListItems.findIndex(item => item.itemName.toLowerCase() == newItem.itemName.toLowerCase());
+    const indexOfDuplicate = user.groceryListItems?.findIndex(item => item.itemName.toLowerCase() == newItem.itemName.toLowerCase());
     console.log(`indexOfDuplicate is: ${indexOfDuplicate}`);
 
     //if the newName already exists in this user's list, alert them and return without adding the new item.
@@ -112,14 +117,15 @@ const App = () => {
       return;
     }
 
-    //otherwise, add the new item to the user's grocery list
+    //otherwise, add the new item to the user's grocery list and update state accordingly
     console.log(`adding new item: ${JSON.stringify(newItem)} to userId: ${userId}`);
-    user.groceryListItems.push(newItem);
 
-    console.log(`updated 'user' is now: ${JSON.stringify(user)}`);
+    let updatedUser = {...user, groceryListItems: [...user.groceryListItems, newItem]};
+    console.log(`updatedUser: ${JSON.stringify(updatedUser)}`);
+    setUser(updatedUser);
 
     //call updateDatabase function to update 'user' in the db
-    updateDatabase(userId);
+    updateDatabase(userId, updatedUser);
   }
 
   // EDIT a single grocery item from a given user's list

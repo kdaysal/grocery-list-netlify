@@ -265,15 +265,16 @@ const App = () => {
     let userId = user._id;
     //console.log(`userId: ${userId}`);
 
-    
-
-    let filteredGroceryListItems = user.groceryListItems.filter((currentItem) => currentItem._id != itemId);
+    let filteredGroceryListItems = (itemId) ? 
+    user.groceryListItems.filter((currentItem) => currentItem._id != itemId)
+    : user.groceryListItems.filter((currentItem) => currentItem.itemName != itemName)
 
     //console.log(`updated groceryListItem array will be: ${JSON.stringify(filteredGroceryListItems)}`);
 
+    //!!!need to refactor this to update the actual state, not the local variable - TODO
     user.groceryListItems = filteredGroceryListItems;
 
-    console.log(`newly updated 'user' object will be set to: ${JSON.stringify(user)}`);
+    //console.log(`newly updated 'user' object will be set to: ${JSON.stringify(user)}`);
 
     //call updateDatabase function to update 'user' in the db
     updateDatabase(userId);

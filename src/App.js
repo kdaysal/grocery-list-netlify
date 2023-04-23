@@ -253,13 +253,19 @@ const App = () => {
   // END DELETE USER
 
   // DELETE a single grocery item from a given user's list
-  const onDelete = async (itemId) => {
+  const onDelete = (itemId = null, itemName) => {
     console.log(`ready to delete grocery item ID: ${itemId}`)
+    console.log(`ready to delete grocery itemName: ${itemName}`)
+    console.log(`typeof itemId: ${typeof itemId}`);
+    console.log(`itemId == null:  ${itemId == null}`);
+    console.log(`itemId == '':  ${itemId == ''}`);
     //find the grocery list item (by id) and remove it from the 'user' object
     //console.log(`updated 'user' is now: ${JSON.stringify(user)}`);
 
     let userId = user._id;
     //console.log(`userId: ${userId}`);
+
+    
 
     let filteredGroceryListItems = user.groceryListItems.filter((currentItem) => currentItem._id != itemId);
 

@@ -13,7 +13,8 @@ const GroceryItem = ({
   showEditItem
 }) => {
 
-  // console.log(`groceryItem is: ${JSON.stringify(groceryItem)}`);
+   //console.log(`groceryItem in GroceryItem.js is: ${JSON.stringify(groceryItem)}`);
+  
   return (
     <div className={`groceryItem ${groceryItem.reminder ? 'reminder' : ''}`} onDoubleClick={() => onToggle(groceryItem._id)}>
       <h3>{groceryItem.itemName}
@@ -35,8 +36,8 @@ const GroceryItem = ({
         <FaTimes style={{ color: 'red', cursor: 'pointer' }}
           onClick={() => {
 
-            if (window.confirm(`Are you sure you want to delete this item with id: ${groceryItem._id}?`)) {
-              onDelete(groceryItem._id)
+            if (window.confirm(`Are you sure you want to delete this item with id: ${groceryItem._id} and name: ${groceryItem.itemName}?`)) {
+              onDelete(groceryItem._id, groceryItem.itemName)
             }
           }}
         />

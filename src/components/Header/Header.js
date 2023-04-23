@@ -24,7 +24,7 @@ const Header = ({
   // console.log('user.groceryListItems == []: ', user.groceryListItems == [])
   // console.log('user.groceryListItems == undefined: ', user.groceryListItems == undefined);
   // console.log('user.groceryListItems.length > 0: ', user.groceryListItems?.length > 0);
-  console.log('user.groceryListItems?.length: ', user.groceryListItems?.length)
+  // console.log('user.groceryListItems?.length: ', user.groceryListItems?.length)
 
   return (
     <header>

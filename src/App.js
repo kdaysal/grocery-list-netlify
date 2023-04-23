@@ -58,11 +58,11 @@ const App = () => {
   //takes in a userId and updates the 'user' object in the database to match whatever the current state of 'user' in App.js is. This works because this function will only be called AFTER state of 'user' has been updated in App.js.
   const updateDatabase = async (userId, updatedUser = null) => {
     console.log(`updateDatabase function called in App.js`);
-    console.log(`JSON.stringify(user) in updateDatabase(): ${JSON.stringify(user)}`);
-    console.log(`JSON.stringify(newUserObject) in updateDatabase(): ${JSON.stringify(updatedUser)}`)
+    //console.log(`JSON.stringify(user) in updateDatabase(): ${JSON.stringify(user)}`);
+    //console.log(`JSON.stringify(newUserObject) in updateDatabase(): ${JSON.stringify(updatedUser)}`)
 
     let updatedBody = updatedUser == null ? user : updatedUser;
-    console.log(`JSON.stringify(updatedBody): ${JSON.stringify(updatedBody)}`);
+    //console.log(`JSON.stringify(updatedBody): ${JSON.stringify(updatedBody)}`);
     const res = await fetch(`https://damp-forest-55138.herokuapp.com/users/${userId}`, {
       method: 'PATCH',
       headers: {
